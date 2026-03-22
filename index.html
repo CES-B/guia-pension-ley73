@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de Pensión "Ley 73" — por Carlos Serrano</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #006847;
+    --verde-claro: #00a86b;
+    --rojo: #c8102e;
+    --dorado: #c9a84c;
+    --dorado-claro: #f0d080;
+    --crema: #faf7f0;
+    --gris: #2a2a2a;
+    --gris-medio: #555;
+    --blanco: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--crema); color: var(--gris); line-height: 1.6; }
+
+  .nav {
+    background: #004a31; position: sticky; top: 0; z-index: 100;
+    padding: 0 20px; display: flex; gap: 0; overflow-x: auto; scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a {
+    color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.5px; padding: 13px 16px; white-space: nowrap;
+    border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s;
+  }
+  .nav a:hover { color: var(--dorado-claro); border-bottom-color: var(--dorado); }
+
+  .hero {
+    background: linear-gradient(135deg, var(--verde) 0%, #004a31 60%, #00291a 100%);
+    color: white; padding: 60px 40px 50px; text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before { content:''; position:absolute; top:-60px; right:-60px; width:300px; height:300px; border-radius:50%; background:rgba(201,168,76,0.15); }
+  .hero::after  { content:''; position:absolute; bottom:-80px; left:-40px; width:250px; height:250px; border-radius:50%; background:rgba(255,255,255,0.05); }
+  .hero-badge { display:inline-block; background:var(--dorado); color:var(--gris); font-size:11px; font-weight:600; letter-spacing:3px; text-transform:uppercase; padding:6px 18px; border-radius:20px; margin-bottom:20px; }
+  .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.5rem); font-weight:900; line-height:1.1; margin-bottom:16px; }
+  .hero h1 span { color:var(--dorado-claro); }
+  .hero p { font-size:1.1rem; font-weight:300; max-width:580px; margin:0 auto; opacity:0.9; }
+
+  .bandera { display:flex; height:6px; }
+  .bandera div { flex:1; }
+  .b-verde { background:var(--verde); }
+  .b-blanco { background:white; }
+  .b-rojo { background:var(--rojo); }
+
+  .container { max-width:880px; margin:0 auto; padding:0 20px; }
+  .section { padding:50px 0 30px; }
+  .section-title { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; color:var(--verde); border-left:5px solid var(--dorado); padding-left:16px; margin-bottom:24px; }
+
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:18px; margin-bottom:24px; }
+  .card { background:white; border-radius:12px; padding:24px; box-shadow:0 2px 12px rgba(0,0,0,0.07); border-top:4px solid var(--verde-claro); transition:transform 0.2s,box-shadow 0.2s; }
+  .card:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,0,0,0.12); }
+  .card-icon { font-size:2rem; margin-bottom:10px; }
+  .card h3 { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--verde); margin-bottom:7px; }
+  .card p { font-size:0.93rem; color:var(--gris-medio); }
+  .card .highlight { font-size:1.5rem; font-weight:700; color:var(--verde); display:block; margin-top:8px; }
+
+  .step { display:flex; gap:18px; margin-bottom:18px; background:white; border-radius:12px; padding:20px 22px; box-shadow:0 2px 10px rgba(0,0,0,0.06); }
+  .step-num { width:42px; height:42px; min-width:42px; border-radius:50%; background:var(--verde); color:white; font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .step-content h3 { font-family:'Playfair Display',serif; font-size:1rem; color:var(--gris); margin-bottom:5px; }
+  .step-content p { font-size:0.92rem; color:var(--gris-medio); }
+  .step-content a { color:var(--verde); font-weight:600; }
+
+  .calc-box { background:white; border-radius:16px; padding:32px; box-shadow:0 4px 20px rgba(0,0,0,0.08); border:2px solid var(--dorado-claro); }
+  .calc-box h3 { font-family:'Playfair Display',serif; font-size:1.35rem; color:var(--verde); margin-bottom:20px; text-align:center; }
+  .form-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-bottom:14px; }
+  .form-group label { display:block; font-size:0.83rem; font-weight:600; color:var(--gris-medio); letter-spacing:0.4px; margin-bottom:5px; }
+  .form-group input, .form-group select { width:100%; padding:10px 13px; border:1.5px solid #ddd; border-radius:8px; font-size:0.95rem; font-family:'Source Sans 3',sans-serif; color:var(--gris); outline:none; transition:border-color 0.2s; background:white; }
+  .form-group input:focus,.form-group select:focus { border-color:var(--verde); }
+  .btn-calc { width:100%; padding:14px; background:linear-gradient(135deg,var(--verde),var(--verde-claro)); color:white; border:none; border-radius:10px; font-size:1rem; font-weight:600; font-family:'Source Sans 3',sans-serif; cursor:pointer; margin-top:6px; transition:opacity 0.2s,transform 0.15s; }
+  .btn-calc:hover { opacity:0.91; transform:translateY(-1px); }
+  .resultado { display:none; margin-top:22px; background:linear-gradient(135deg,var(--verde) 0%,#004a31 100%); border-radius:12px; padding:24px; color:white; text-align:center; animation:fadeIn 0.4s ease; }
+  .resultado.visible { display:block; }
+  .resultado .monto { font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--dorado-claro); }
+  .resultado .label { font-size:0.88rem; opacity:0.8; margin-bottom:4px; }
+  .resultado .nota { font-size:0.81rem; opacity:0.7; margin-top:12px; line-height:1.5; }
+  .resultado-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0; text-align:left; }
+  .r-item { background:rgba(255,255,255,0.1); border-radius:8px; padding:11px; }
+  .r-item .r-label { font-size:0.78rem; opacity:0.75; }
+  .r-item .r-val { font-size:1.05rem; font-weight:700; color:var(--dorado-claro); }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+
+  .tabla-wrap { overflow-x:auto; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,0.07); margin-bottom:20px; }
+  table { width:100%; border-collapse:collapse; font-size:0.88rem; background:white; }
+  thead tr { background:var(--verde); color:white; }
+  thead th { padding:12px 14px; text-align:left; font-weight:600; font-size:0.83rem; }
+  tbody tr:nth-child(even) { background:#f5f9f7; }
+  tbody tr:hover { background:#e8f5ee; }
+  tbody td { padding:10px 14px; border-bottom:1px solid #eee; }
+  tbody td:first-child { font-weight:600; color:var(--verde); }
+
+  .tips { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:15px; }
+  .tip { background:white; border-radius:12px; padding:20px; box-shadow:0 2px 10px rgba(0,0,0,0.06); border-left:4px solid var(--dorado); }
+  .tip-icon { font-size:1.4rem; margin-bottom:7px; }
+  .tip h4 { font-family:'Playfair Display',serif; font-size:0.97rem; margin-bottom:5px; color:var(--verde); }
+  .tip p { font-size:0.87rem; color:var(--gris-medio); }
+
+  .alerta { background:#fff8e1; border-left:4px solid var(--dorado); border-radius:0 10px 10px 0; padding:15px 18px; margin:18px 0; font-size:0.92rem; color:#5a4200; }
+  .alerta strong { color:#7a5800; }
+  .alerta a { color:#7a5800; }
+  .alerta-roja { background:#fff0f0; border-left:4px solid var(--rojo); border-radius:0 10px 10px 0; padding:15px 18px; margin:18px 0; font-size:0.92rem; color:#6a0010; }
+  .alerta-roja strong { color:#a00018; }
+  .alerta-verde { background:#e8f5ee; border-left:4px solid var(--verde); border-radius:0 10px 10px 0; padding:15px 18px; margin:18px 0; font-size:0.92rem; color:#004a31; }
+  .alerta-verde strong { color:var(--verde); }
+  .alerta-verde a { color:var(--verde); font-weight:600; }
+
+  .errores { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
+  .error-card { background:white; border-radius:12px; padding:20px; box-shadow:0 2px 10px rgba(0,0,0,0.06); border-top:4px solid var(--rojo); }
+  .error-card .e-icon { font-size:1.5rem; margin-bottom:8px; }
+  .error-card h4 { font-size:0.93rem; font-weight:700; color:var(--rojo); margin-bottom:6px; }
+  .error-card p { font-size:0.87rem; color:var(--gris-medio); }
+
+  .faq { margin-bottom:10px; background:white; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+  .faq-q { padding:16px 20px; cursor:pointer; font-weight:600; font-size:0.93rem; display:flex; justify-content:space-between; align-items:center; user-select:none; }
+  .faq-q:hover { background:#f5f9f7; }
+  .faq-q .arrow { transition:transform 0.25s; font-size:0.8rem; color:var(--verde); }
+  .faq-a { display:none; padding:0 20px 16px; font-size:0.9rem; color:var(--gris-medio); line-height:1.7; border-top:1px solid #eee; }
+  .faq.open .faq-a { display:block; }
+  .faq.open .arrow { transform:rotate(180deg); }
+
+  .links-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; }
+  .link-card { background:white; border-radius:12px; padding:18px 20px; box-shadow:0 2px 10px rgba(0,0,0,0.07); text-decoration:none; color:inherit; display:flex; align-items:center; gap:14px; border:1.5px solid transparent; transition:border-color 0.2s,transform 0.2s; }
+  .link-card:hover { border-color:var(--verde); transform:translateY(-2px); }
+  .link-icon { font-size:1.8rem; min-width:36px; }
+  .link-text h4 { font-size:0.93rem; font-weight:600; color:var(--verde); }
+  .link-text p { font-size:0.82rem; color:var(--gris-medio); }
+
+  footer { background:var(--gris); color:rgba(255,255,255,0.6); text-align:center; padding:28px 20px; font-size:0.82rem; margin-top:40px; }
+  footer strong { color:white; }
+  footer a { color:var(--dorado-claro); }
+
+  @media(max-width:600px) {
+    .hero { padding:40px 20px 36px; }
+    .section { padding:36px 0 20px; }
+    .calc-box { padding:20px 16px; }
+    .resultado-grid { grid-template-columns:1fr; }
+    .nav a { padding:13px 12px; }
+  }
+</style>
+  <meta property="og:title" content="Guía de Pensión Ley 73 - Carlos Serrano"/>
+  <meta property="og:description" content="Guía completa para entender, calcular y maximizar tu pensión del IMSS bajo la Ley 73. Incluye calculadora, pasos del trámite y Modalidad 40."/>
+  <meta property="og:image" content="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjYzMCIgdmlld0JveD0iMCAwIDEyMDAgNjMwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDA2ODQ3Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTUlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDA0YTMxIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzAwMjkxYSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ29sZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojYzlhODRjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I2YwZDA4MCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CgogIDwhLS0gRm9uZG8gLS0+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjMwIiBmaWxsPSJ1cmwoI2JnKSIvPgoKICA8IS0tIEZyYW5qYSBiYW5kZXJhIGl6cXVpZXJkYSAtLT4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTgiIGhlaWdodD0iNjMwIiBmaWxsPSIjMDA2ODQ3Ii8+CiAgPHJlY3QgeD0iMTgiIHk9IjAiIHdpZHRoPSIxOCIgaGVpZ2h0PSI2MzAiIGZpbGw9IiNmZmZmZmYiLz4KICA8cmVjdCB4PSIzNiIgeT0iMCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjYzMCIgZmlsbD0iI2M4MTAyZSIvPgoKICA8IS0tIEZyYW5qYSBiYW5kZXJhIGRlcmVjaGEgLS0+CiAgPHJlY3QgeD0iMTE0NiIgeT0iMCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjYzMCIgZmlsbD0iIzAwNjg0NyIvPgogIDxyZWN0IHg9IjExNjQiIHk9IjAiIHdpZHRoPSIxOCIgaGVpZ2h0PSI2MzAiIGZpbGw9IiNmZmZmZmYiLz4KICA8cmVjdCB4PSIxMTgyIiB5PSIwIiB3aWR0aD0iMTgiIGhlaWdodD0iNjMwIiBmaWxsPSIjYzgxMDJlIi8+CgogIDwhLS0gQ8OtcmN1bG8gZGVjb3JhdGl2byBmb25kbyAtLT4KICA8Y2lyY2xlIGN4PSIxMDUwIiBjeT0iMTIwIiByPSIyMjAiIGZpbGw9InJnYmEoMjAxLDE2OCw3NiwwLjA4KSIvPgogIDxjaXJjbGUgY3g9IjE1MCIgY3k9IjUyMCIgcj0iMTgwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDQpIi8+CgogIDwhLS0gw4FndWlsYSBlc3RpbGl6YWRhICh2ZWN0b3JpYWwgc2ltcGxlKSAtLT4KICA8IS0tIEN1ZXJwbyAtLT4KICA8ZWxsaXBzZSBjeD0iNjAwIiBjeT0iMjMwIiByeD0iNzIiIHJ5PSI4OCIgZmlsbD0iI2M5YTg0YyIvPgogIDwhLS0gQ2FiZXphIC0tPgogIDxjaXJjbGUgY3g9IjYwMCIgY3k9IjE0OCIgcj0iNDAiIGZpbGw9IiNjOWE4NGMiLz4KICA8IS0tIFBpY28gLS0+CiAgPHBvbHlnb24gcG9pbnRzPSI2MDAsMTYyIDYyMiwxNzUgNjAwLDE4NSIgZmlsbD0iIzhCNjkxNCIvPgogIDwhLS0gT2pvIC0tPgogIDxjaXJjbGUgY3g9IjYxMCIgY3k9IjE0MiIgcj0iNyIgZmlsbD0iIzAwMjkxYSIvPgogIDxjaXJjbGUgY3g9IjYxMiIgY3k9IjE0MCIgcj0iMi41IiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gQWxhIGl6cXVpZXJkYSAtLT4KICA8cGF0aCBkPSJNNTMwLDIxMCBRNDMwLDE0MCAzOTAsMTkwIFE0MjAsMjUwIDUzMCwyNjAgWiIgZmlsbD0iI2M5YTg0YyIvPgogIDxwYXRoIGQ9Ik01MzAsMjQwIFE0NDAsMjAwIDQwMCwyMzAgUTQzMCwyNzAgNTMwLDI3NSBaIiBmaWxsPSIjYjg5NjNlIi8+CiAgPCEtLSBBbGEgZGVyZWNoYSAtLT4KICA8cGF0aCBkPSJNNjcwLDIxMCBRNzcwLDE0MCA4MTAsMTkwIFE3ODAsMjUwIDY3MCwyNjAgWiIgZmlsbD0iI2M5YTg0YyIvPgogIDxwYXRoIGQ9Ik02NzAsMjQwIFE3NjAsMjAwIDgwMCwyMzAgUTc3MCwyNzAgNjcwLDI3NSBaIiBmaWxsPSIjYjg5NjNlIi8+CiAgPCEtLSBQYXRhcyAtLT4KICA8cmVjdCB4PSI1NzIiIHk9IjMxMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwIiByeD0iNiIgZmlsbD0iI2I4OTYzZSIvPgogIDxyZWN0IHg9IjYxMiIgeT0iMzEwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiIHJ4PSI2IiBmaWxsPSIjYjg5NjNlIi8+CiAgPCEtLSBHYXJyYXMgaXpxIC0tPgogIDxsaW5lIHgxPSI1NzIiIHkxPSIzNTAiIHgyPSI1NDgiIHkyPSIzNjgiIHN0cm9rZT0iI2I4OTYzZSIgc3Ryb2tlLXdpZHRoPSI3IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8bGluZSB4MT0iNTcyIiB5MT0iMzUwIiB4Mj0iNTYyIiB5Mj0iMzcyIiBzdHJva2U9IiNiODk2M2UiIHN0cm9rZS13aWR0aD0iNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjU3MiIgeTE9IjM1MCIgeDI9IjU3OCIgeTI9IjM3MyIgc3Ryb2tlPSIjYjg5NjNlIiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gR2FycmFzIGRlciAtLT4KICA8bGluZSB4MT0iNjI4IiB5MT0iMzUwIiB4Mj0iNjUyIiB5Mj0iMzY4IiBzdHJva2U9IiNiODk2M2UiIHN0cm9rZS13aWR0aD0iNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjYyOCIgeTE9IjM1MCIgeDI9IjYzOCIgeTI9IjM3MiIgc3Ryb2tlPSIjYjg5NjNlIiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSI2MjgiIHkxPSIzNTAiIHgyPSI2MjIiIHkyPSIzNzMiIHN0cm9rZT0iI2I4OTYzZSIgc3Ryb2tlLXdpZHRoPSI3IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8IS0tIEVzY3VkbyBwZWNobyAtLT4KICA8ZWxsaXBzZSBjeD0iNjAwIiBjeT0iMjQ4IiByeD0iMjgiIHJ5PSIzMiIgZmlsbD0iIzAwNjg0NyIgb3BhY2l0eT0iMC42Ii8+CiAgPHRleHQgeD0iNjAwIiB5PSIyNTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiNmMGQwODAiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPjczPC90ZXh0PgoKICA8IS0tIEzDrW5lYSBkb3JhZGEgZGVjb3JhdGl2YSAtLT4KICA8cmVjdCB4PSI4MCIgeT0iNDE1IiB3aWR0aD0iMTA0MCIgaGVpZ2h0PSI0IiByeD0iMiIgZmlsbD0idXJsKCNnb2xkKSIgb3BhY2l0eT0iMC42Ii8+CgogIDwhLS0gVMOtdHVsbyBwcmluY2lwYWwgLS0+CiAgPHRleHQgeD0iNjAwIiB5PSI0NzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSI2MiIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0id2hpdGUiPkd1w61hIGRlIFBlbnNpw7NuPC90ZXh0PgogIDx0ZXh0IHg9IjYwMCIgeT0iNTQwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSwgc2VyaWYiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IiNmMGQwODAiPiJMZXkgNzMiIElNU1M8L3RleHQ+CgogIDwhLS0gQXV0b3IgLS0+CiAgPHRleHQgeD0iNjAwIiB5PSI1OTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIyOCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjcpIj5wb3IgQ2FybG9zIFNlcnJhbm8gwrcgTcOpeGljbyAyMDI2PC90ZXh0Pgo8L3N2Zz4="/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:type" content="website"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Guía de Pensión Ley 73 - Carlos Serrano"/>
+  <meta name="twitter:image" content="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjYzMCIgdmlld0JveD0iMCAwIDEyMDAgNjMwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDA2ODQ3Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTUlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDA0YTMxIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzAwMjkxYSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ29sZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojYzlhODRjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I2YwZDA4MCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CgogIDwhLS0gRm9uZG8gLS0+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjMwIiBmaWxsPSJ1cmwoI2JnKSIvPgoKICA8IS0tIEZyYW5qYSBiYW5kZXJhIGl6cXVpZXJkYSAtLT4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTgiIGhlaWdodD0iNjMwIiBmaWxsPSIjMDA2ODQ3Ii8+CiAgPHJlY3QgeD0iMTgiIHk9IjAiIHdpZHRoPSIxOCIgaGVpZ2h0PSI2MzAiIGZpbGw9IiNmZmZmZmYiLz4KICA8cmVjdCB4PSIzNiIgeT0iMCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjYzMCIgZmlsbD0iI2M4MTAyZSIvPgoKICA8IS0tIEZyYW5qYSBiYW5kZXJhIGRlcmVjaGEgLS0+CiAgPHJlY3QgeD0iMTE0NiIgeT0iMCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjYzMCIgZmlsbD0iIzAwNjg0NyIvPgogIDxyZWN0IHg9IjExNjQiIHk9IjAiIHdpZHRoPSIxOCIgaGVpZ2h0PSI2MzAiIGZpbGw9IiNmZmZmZmYiLz4KICA8cmVjdCB4PSIxMTgyIiB5PSIwIiB3aWR0aD0iMTgiIGhlaWdodD0iNjMwIiBmaWxsPSIjYzgxMDJlIi8+CgogIDwhLS0gQ8OtcmN1bG8gZGVjb3JhdGl2byBmb25kbyAtLT4KICA8Y2lyY2xlIGN4PSIxMDUwIiBjeT0iMTIwIiByPSIyMjAiIGZpbGw9InJnYmEoMjAxLDE2OCw3NiwwLjA4KSIvPgogIDxjaXJjbGUgY3g9IjE1MCIgY3k9IjUyMCIgcj0iMTgwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDQpIi8+CgogIDwhLS0gw4FndWlsYSBlc3RpbGl6YWRhICh2ZWN0b3JpYWwgc2ltcGxlKSAtLT4KICA8IS0tIEN1ZXJwbyAtLT4KICA8ZWxsaXBzZSBjeD0iNjAwIiBjeT0iMjMwIiByeD0iNzIiIHJ5PSI4OCIgZmlsbD0iI2M5YTg0YyIvPgogIDwhLS0gQ2FiZXphIC0tPgogIDxjaXJjbGUgY3g9IjYwMCIgY3k9IjE0OCIgcj0iNDAiIGZpbGw9IiNjOWE4NGMiLz4KICA8IS0tIFBpY28gLS0+CiAgPHBvbHlnb24gcG9pbnRzPSI2MDAsMTYyIDYyMiwxNzUgNjAwLDE4NSIgZmlsbD0iIzhCNjkxNCIvPgogIDwhLS0gT2pvIC0tPgogIDxjaXJjbGUgY3g9IjYxMCIgY3k9IjE0MiIgcj0iNyIgZmlsbD0iIzAwMjkxYSIvPgogIDxjaXJjbGUgY3g9IjYxMiIgY3k9IjE0MCIgcj0iMi41IiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gQWxhIGl6cXVpZXJkYSAtLT4KICA8cGF0aCBkPSJNNTMwLDIxMCBRNDMwLDE0MCAzOTAsMTkwIFE0MjAsMjUwIDUzMCwyNjAgWiIgZmlsbD0iI2M5YTg0YyIvPgogIDxwYXRoIGQ9Ik01MzAsMjQwIFE0NDAsMjAwIDQwMCwyMzAgUTQzMCwyNzAgNTMwLDI3NSBaIiBmaWxsPSIjYjg5NjNlIi8+CiAgPCEtLSBBbGEgZGVyZWNoYSAtLT4KICA8cGF0aCBkPSJNNjcwLDIxMCBRNzcwLDE0MCA4MTAsMTkwIFE3ODAsMjUwIDY3MCwyNjAgWiIgZmlsbD0iI2M5YTg0YyIvPgogIDxwYXRoIGQ9Ik02NzAsMjQwIFE3NjAsMjAwIDgwMCwyMzAgUTc3MCwyNzAgNjcwLDI3NSBaIiBmaWxsPSIjYjg5NjNlIi8+CiAgPCEtLSBQYXRhcyAtLT4KICA8cmVjdCB4PSI1NzIiIHk9IjMxMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwIiByeD0iNiIgZmlsbD0iI2I4OTYzZSIvPgogIDxyZWN0IHg9IjYxMiIgeT0iMzEwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiIHJ4PSI2IiBmaWxsPSIjYjg5NjNlIi8+CiAgPCEtLSBHYXJyYXMgaXpxIC0tPgogIDxsaW5lIHgxPSI1NzIiIHkxPSIzNTAiIHgyPSI1NDgiIHkyPSIzNjgiIHN0cm9rZT0iI2I4OTYzZSIgc3Ryb2tlLXdpZHRoPSI3IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8bGluZSB4MT0iNTcyIiB5MT0iMzUwIiB4Mj0iNTYyIiB5Mj0iMzcyIiBzdHJva2U9IiNiODk2M2UiIHN0cm9rZS13aWR0aD0iNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjU3MiIgeTE9IjM1MCIgeDI9IjU3OCIgeTI9IjM3MyIgc3Ryb2tlPSIjYjg5NjNlIiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gR2FycmFzIGRlciAtLT4KICA8bGluZSB4MT0iNjI4IiB5MT0iMzUwIiB4Mj0iNjUyIiB5Mj0iMzY4IiBzdHJva2U9IiNiODk2M2UiIHN0cm9rZS13aWR0aD0iNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjYyOCIgeTE9IjM1MCIgeDI9IjYzOCIgeTI9IjM3MiIgc3Ryb2tlPSIjYjg5NjNlIiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSI2MjgiIHkxPSIzNTAiIHgyPSI2MjIiIHkyPSIzNzMiIHN0cm9rZT0iI2I4OTYzZSIgc3Ryb2tlLXdpZHRoPSI3IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8IS0tIEVzY3VkbyBwZWNobyAtLT4KICA8ZWxsaXBzZSBjeD0iNjAwIiBjeT0iMjQ4IiByeD0iMjgiIHJ5PSIzMiIgZmlsbD0iIzAwNjg0NyIgb3BhY2l0eT0iMC42Ii8+CiAgPHRleHQgeD0iNjAwIiB5PSIyNTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiNmMGQwODAiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPjczPC90ZXh0PgoKICA8IS0tIEzDrW5lYSBkb3JhZGEgZGVjb3JhdGl2YSAtLT4KICA8cmVjdCB4PSI4MCIgeT0iNDE1IiB3aWR0aD0iMTA0MCIgaGVpZ2h0PSI0IiByeD0iMiIgZmlsbD0idXJsKCNnb2xkKSIgb3BhY2l0eT0iMC42Ii8+CgogIDwhLS0gVMOtdHVsbyBwcmluY2lwYWwgLS0+CiAgPHRleHQgeD0iNjAwIiB5PSI0NzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSI2MiIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0id2hpdGUiPkd1w61hIGRlIFBlbnNpw7NuPC90ZXh0PgogIDx0ZXh0IHg9IjYwMCIgeT0iNTQwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSwgc2VyaWYiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IiNmMGQwODAiPiJMZXkgNzMiIElNU1M8L3RleHQ+CgogIDwhLS0gQXV0b3IgLS0+CiAgPHRleHQgeD0iNjAwIiB5PSI1OTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIyOCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjcpIj5wb3IgQ2FybG9zIFNlcnJhbm8gwrcgTcOpeGljbyAyMDI2PC90ZXh0Pgo8L3N2Zz4="/>
+</head>
+<body>
+
+<div class="bandera"><div class="b-verde"></div><div class="b-blanco"></div><div class="b-rojo"></div></div>
+
+<div class="hero">
+  <div class="hero-badge">🇲🇽 por Carlos Serrano · IMSS México 2026</div>
+  <h1>Guía de Pensión<br><span>"Ley 73"</span></h1>
+  <p style="margin-bottom:10px;">Guía completa, práctica y actualizada para entender, calcular y maximizar tu pensión de retiro — pensada para compartirse con todos</p>
+  <p style="font-size:0.9rem;opacity:0.7;font-style:italic;">por Carlos Serrano</p>
+</div>
+
+<div class="bandera"><div class="b-verde"></div><div class="b-blanco"></div><div class="b-rojo"></div></div>
+
+<nav class="nav">
+  <a href="javascript:void(0)" onclick="document.getElementById('que-es').scrollIntoView({behavior:'smooth'})">¿Qué es?</a>
+  <a href="javascript:void(0)" onclick="document.getElementById('requisitos').scrollIntoView({behavior:'smooth'})">Requisitos</a>
+  <a href="javascript:void(0)" onclick="document.getElementById('formula').scrollIntoView({behavior:'smooth'})">Cómo se calcula</a>
+  <a href="javascript:void(0)" onclick="document.getElementById('calculadora').scrollIntoView({behavior:'smooth'})">Calculadora</a>
+  <a href="javascript:void(0)" onclick="document.getElementById('tramite').scrollIntoView({behavior:'smooth'})">Trámite paso a paso</a>
+  <a href="javascript:void(0)" onclick="document.getElementById('documentos').scrollIntoView({behavior:'smooth'})">Documentos</a>
+  <a href="javascript:void(0)" onclick="document.getElementById('modalidad40').scrollIntoView({behavior:'smooth'})">Modalidad 40</a>
+  <a href="javascript:void(0)" onclick="document.getElementById('estrategias').scrollIntoView({behavior:'smooth'})">Estrategias</a>
+  <a href="javascript:void(0)" onclick="document.getElementById('errores').scrollIntoView({behavior:'smooth'})">Errores comunes</a>
+  <a href="javascript:void(0)" onclick="document.getElementById('faq').scrollIntoView({behavior:'smooth'})">Preguntas frecuentes</a>
+  <a href="javascript:void(0)" onclick="document.getElementById('links').scrollIntoView({behavior:'smooth'})">Links oficiales</a>
+</nav>
+
+<div class="container">
+
+  <!-- ¿QUÉ ES? -->
+  <div class="section" id="que-es">
+    <div class="section-title">¿Qué es la Ley 73?</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">📅</div>
+        <h3>¿A quién aplica?</h3>
+        <p>A trabajadores cuyo <strong>primer registro ante el IMSS fue antes del 1° de julio de 1997</strong>. Se les llama "Generación de Transición". Si tienes duda, consulta tu constancia de semanas cotizadas.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💰</div>
+        <h3>¿Cómo se calcula?</h3>
+        <p>La pensión se basa en tu <strong>salario promedio de las últimas 250 semanas cotizadas (≈ últimos 5 años)</strong> y el total de semanas acumuladas. No depende de tu Afore.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🛡️</div>
+        <h3>Pensión Mínima Garantizada</h3>
+        <p>Si tu cálculo resulta inferior al mínimo, el Gobierno federal cubre la diferencia:</p>
+        <span class="highlight">$10,636 MXN/mes</span>
+        <p style="font-size:0.82rem;margin-top:6px;color:var(--gris-medio)">Se actualiza cada año con la inflación (INPC)</p>
+      </div>
+      <div class="card" style="border-top-color:var(--dorado);">
+        <div class="card-icon">⚖️</div>
+        <h3>Ley 73 vs Ley 97</h3>
+        <p>Bajo <strong>Ley 73</strong>, el IMSS paga directamente con base en tu historial laboral. Bajo <strong>Ley 97</strong>, la pensión depende del saldo acumulado en tu Afore. La Ley 73 suele ser más favorable para el trabajador.</p>
+      </div>
+    </div>
+    <div class="alerta-verde">
+      <strong>✅ ¿Cómo saber si soy Ley 73?</strong> Ingresa a <a href="https://serviciosdigitales.imss.gob.mx" target="_blank" rel="noopener">serviciosdigitales.imss.gob.mx</a> con tu NSS y CURP. Descarga tu Constancia de Semanas Cotizadas. Si tu fecha de primer alta es anterior al <strong>1 de julio de 1997</strong>, eres Ley 73. Recomendación: revisa esta constancia al menos una vez al año para detectar errores a tiempo.
+    </div>
+  </div>
+
+  <!-- REQUISITOS -->
+  <div id="requisitos" class="section">
+    <div class="section-title">Requisitos para Pensionarte en 2026</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h3>Semanas cotizadas mínimas</h3>
+        <p>Bajo la Ley 73 se requieren <strong>mínimo 500 semanas</strong> (≈ 10 años de cotización). A más semanas, mayor porcentaje de pensión recibes.</p>
+      </div>
+      <div class="card" style="border-top-color:var(--dorado);">
+        <div class="card-icon">🎂</div>
+        <h3>Cesantía — 60 años</h3>
+        <p>Puedes pensionarte a partir de los <strong>60 años</strong>, pero recibirás solo el <strong>75%</strong> del monto base calculado. Debes no tener patrón activo en el IMSS.</p>
+      </div>
+      <div class="card" style="border-top-color:var(--rojo);">
+        <div class="card-icon">🏆</div>
+        <h3>Vejez — 65 años</h3>
+        <p>A los <strong>65 años o más</strong> recibes el <strong>100%</strong> del monto calculado. Es la modalidad más conveniente económicamente si tu salud lo permite.</p>
+      </div>
+      <div class="card" style="border-top-color:var(--verde);">
+        <div class="card-icon">🔗</div>
+        <h3>Baja del régimen obligatorio</h3>
+        <p>Para tramitar la pensión <strong>no debes tener un patrón activo</strong> reportándote al IMSS. Debes haber causado baja del régimen obligatorio.</p>
+      </div>
+    </div>
+
+    <div class="tabla-wrap">
+      <table>
+        <thead><tr><th>Edad al pensionarte</th><th>% que recibes</th><th>Denominación oficial</th><th>Observación</th></tr></thead>
+        <tbody>
+          <tr><td>60 años</td><td>75%</td><td>Cesantía en edad avanzada</td><td>Menor beneficio mensual</td></tr>
+          <tr><td>61 años</td><td>80%</td><td>Cesantía en edad avanzada</td><td>—</td></tr>
+          <tr><td>62 años</td><td>85%</td><td>Cesantía en edad avanzada</td><td>Punto de equilibrio recomendado</td></tr>
+          <tr><td>63 años</td><td>90%</td><td>Cesantía en edad avanzada</td><td>Punto de equilibrio recomendado</td></tr>
+          <tr><td>64 años</td><td>95%</td><td>Cesantía en edad avanzada</td><td>—</td></tr>
+          <tr><td>65 años o más</td><td>100%</td><td>Vejez</td><td>Máximo beneficio mensual</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alerta">
+      <strong>⚠️ Vigencia de derechos:</strong> Si dejas de cotizar, tienes un período de gracia equivalente a la cuarta parte de tus semanas cotizadas para seguir con derecho a pensión. Pasado ese plazo sin cotizar o afiliarte a Modalidad 40, puedes perder el derecho. Ejemplo: si tienes 800 semanas cotizadas, tu vigencia de derechos es de 200 semanas (≈ 4 años).
+    </div>
+  </div>
+
+  <!-- FÓRMULA -->
+  <div id="formula" class="section">
+    <div class="section-title">Cómo se Calcula tu Pensión</div>
+
+    <div class="alerta">
+      <strong>📌 Fórmula oficial resumida — 5 pasos:</strong><br>
+      <strong>1.</strong> Cuantía Básica = 13% del salario mensual promedio (últimas 250 semanas)<br>
+      <strong>2.</strong> Por cada 52 semanas adicionales a las 500 de base, se agrega +2.45%<br>
+      <strong>3.</strong> Se suman asignaciones familiares (cónyuge, hijos) o ayuda asistencial (sin beneficiarios)<br>
+      <strong>4.</strong> Todo se multiplica por <strong>1.11</strong> (Decreto Presidencial 2001 — 11% adicional automático)<br>
+      <strong>5.</strong> El resultado se multiplica por el factor de edad (75% a 100%)
+    </div>
+
+    <div class="tabla-wrap">
+      <table>
+        <thead><tr><th>Semanas cotizadas</th><th>Años aprox.</th><th>Cuantía total acumulada</th><th>Efecto en pensión</th></tr></thead>
+        <tbody>
+          <tr><td>500 semanas (mínimo)</td><td>~10 años</td><td>13.00%</td><td>Pensión base mínima</td></tr>
+          <tr><td>700 semanas</td><td>~14 años</td><td>~22.75%</td><td>Pensión media-baja</td></tr>
+          <tr><td>900 semanas</td><td>~18 años</td><td>~28.50%</td><td>Pensión media</td></tr>
+          <tr><td>1,000 semanas</td><td>~20 años</td><td>~31.50%</td><td>Pensión media-alta</td></tr>
+          <tr><td>1,250 semanas</td><td>~25 años</td><td>~37.75%</td><td>Pensión alta</td></tr>
+          <tr><td>1,500 semanas</td><td>~30 años</td><td>~44.00%</td><td>Pensión muy alta</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cards">
+      <div class="card" style="border-top-color:var(--dorado);">
+        <div class="card-icon">👨‍👩‍👧</div>
+        <h3>Asignaciones familiares</h3>
+        <p>Se suman porcentajes adicionales sobre la pensión base:</p>
+        <ul style="margin-top:10px;padding-left:18px;font-size:0.9rem;color:var(--gris-medio);line-height:2;">
+          <li>Cónyuge o concubina/o: <strong>+15%</strong></li>
+          <li>Por cada hijo menor de 16 años: <strong>+10%</strong></li>
+          <li>Por hijo entre 16–25 años estudiando: <strong>+10%</strong></li>
+          <li>Por hijo con incapacidad permanente: <strong>+10%</strong></li>
+        </ul>
+      </div>
+      <div class="card" style="border-top-color:var(--verde);">
+        <div class="card-icon">🤝</div>
+        <h3>Ayuda asistencial</h3>
+        <p>Si <strong>no tienes cónyuge ni hijos</strong>, el IMSS otorga una "ayuda asistencial" del <strong>+15%</strong> sobre tu pensión base como compensación. No se puede combinar con las asignaciones familiares.</p>
+      </div>
+      <div class="card" style="border-top-color:var(--rojo);">
+        <div class="card-icon">📜</div>
+        <h3>Decreto 2001 (Factor 1.11)</h3>
+        <p>Por decreto del año 2001, <strong>todas las pensiones Ley 73 se multiplican por 1.11</strong>, es decir, recibes automáticamente un <strong>11% adicional</strong> sobre el monto calculado. No tienes que solicitarlo.</p>
+      </div>
+    </div>
+
+    <div class="alerta-verde">
+      <strong>💡 Ejemplo práctico completo:</strong> Trabajadora de 65 años, salario promedio $18,000/mes, 1,000 semanas cotizadas, sin cónyuge ni hijos:<br>
+      Cuantía = 31.50% × $18,000 = $5,670 → +15% ayuda asistencial = $6,520.50 → ×1.11 = $7,237.75 → ×100% (65 años) = <strong>$7,237.75/mes</strong>.<br>
+      Como es menor al mínimo garantizado, el IMSS pagaría la PMG: <strong>$10,636/mes</strong>.
+    </div>
+  </div>
+
+  <!-- CALCULADORA -->
+  <div id="calculadora" class="section">
+    <div class="section-title">Calculadora Estimada de Pensión</div>
+    <div class="calc-box">
+      <h3>🧮 Estima tu Pensión Mensual</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Salario mensual promedio bruto (últimos 5 años)</label>
+          <input type="number" id="salario" placeholder="Ej. 18000" min="0">
+        </div>
+        <div class="form-group">
+          <label>Total de semanas cotizadas acumuladas</label>
+          <input type="number" id="semanas" placeholder="Ej. 900" min="500">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Edad al pensionarte</label>
+          <select id="edad">
+            <option value="0.75">60 años — 75%</option>
+            <option value="0.80">61 años — 80%</option>
+            <option value="0.85">62 años — 85%</option>
+            <option value="0.90">63 años — 90%</option>
+            <option value="0.95">64 años — 95%</option>
+            <option value="1.00" selected>65 años o más — 100%</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Situación familiar al pensionarte</label>
+          <select id="familiar">
+            <option value="0.15">Sin cónyuge ni hijos (ayuda asistencial +15%)</option>
+            <option value="0.15">Con cónyuge, sin hijos (+15%)</option>
+            <option value="0.25">Con cónyuge + 1 hijo (+25%)</option>
+            <option value="0.35">Con cónyuge + 2 hijos (+35%)</option>
+            <option value="0.10">Solo 1 hijo, sin cónyuge (+10%)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-calc" onclick="calcular()">Calcular mi Pensión Estimada</button>
+
+      <div class="resultado" id="resultado">
+        <div class="label">Tu pensión mensual estimada es de</div>
+        <div class="monto" id="monto-result">$0</div>
+        <div id="minimo-aviso" style="display:none;margin-top:8px;background:rgba(255,165,0,0.25);border-radius:8px;padding:8px 12px;font-size:0.85rem;">
+          ⚠️ Tu cálculo resultó menor al mínimo garantizado. El IMSS te pagará la <strong>Pensión Mínima Garantizada 2026: $10,636/mes</strong>.
+        </div>
+        <div class="resultado-grid">
+          <div class="r-item"><div class="r-label">Cuantía base (13%)</div><div class="r-val" id="cuantia-r">—</div></div>
+          <div class="r-item"><div class="r-label">Incremento por semanas extra</div><div class="r-val" id="incremento-r">—</div></div>
+          <div class="r-item"><div class="r-label">Factor de edad aplicado</div><div class="r-val" id="edad-r">—</div></div>
+          <div class="r-item"><div class="r-label">Factor Decreto 2001 (×1.11)</div><div class="r-val">Incluido ✓</div></div>
+          <div class="r-item"><div class="r-label">Asignación / Ayuda asistencial</div><div class="r-val" id="familiar-r">—</div></div>
+          <div class="r-item"><div class="r-label">Pensión mínima garantizada</div><div class="r-val">$10,636/mes</div></div>
+        </div>
+        <div class="nota">⚠️ Este es un estimado orientativo. El cálculo oficial lo realiza el IMSS con tu expediente completo. Consúltalo en tu Unidad de Medicina Familiar o en imss.gob.mx</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRÁMITE PASO A PASO -->
+  <div id="tramite" class="section">
+    <div class="section-title">Trámite Paso a Paso</div>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Consulta y descarga tu Constancia de Semanas Cotizadas</h3>
+        <p>Es el primer paso y el más importante. Ingresa al portal digital del IMSS: <a href="https://serviciosdigitales.imss.gob.mx" target="_blank" rel="noopener">serviciosdigitales.imss.gob.mx</a> con tu NSS y CURP. El sistema enviará la constancia en PDF a tu correo. Verifica que todos los periodos laborales estén registrados y que los nombres de los patrones sean correctos. <strong>Revísala antes de continuar.</strong></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Confirma que eres Ley 73 y tu régimen</h3>
+        <p>En tu constancia verifica que tu fecha de primer registro sea <strong>anterior al 1 de julio de 1997</strong>. La herramienta "Mi Pensión Digital" del IMSS también lo confirma: <a href="https://www.imss.gob.mx/pensiones" target="_blank" rel="noopener">imss.gob.mx/pensiones</a>. Si cotizaste en ambas eras (antes y después de 1997), tienes derecho a elegir el régimen más favorable.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Registra o actualiza a tus beneficiarios</h3>
+        <p>Si tienes cónyuge, hijos u otros dependientes económicos, deben estar registrados ante el IMSS como beneficiarios antes de iniciar el trámite. Acude a tu Unidad de Medicina Familiar (UMF) para confirmar o actualizar el registro. Esto impacta directamente las asignaciones familiares que incrementan tu pensión.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Reúne todos los documentos</h3>
+        <p>Consulta la lista completa en la sección de Documentos. Lleva siempre originales <strong>y</strong> copias. Verifica que los nombres en todos los documentos coincidan exactamente con los registros del IMSS. Los documentos con inconsistencias son la causa más frecuente de retrasos.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h3>Solicita un estimado previo al IMSS (muy recomendable)</h3>
+        <p>Antes de tramitar formalmente, acude al área de Prestaciones Económicas de tu UMF y pide un cálculo estimativo. Esto te permite comparar cuánto recibirías a los 60, 62 o 65 años. <strong>Una vez emitida la resolución final, el monto ya no se puede modificar.</strong></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <h3>Presenta la solicitud formal de pensión</h3>
+        <p>Acude a la Subdelegación del IMSS correspondiente a tu domicilio. El trámite también puede iniciarse en línea: <a href="https://www.imss.gob.mx/tramites/imss01002" target="_blank" rel="noopener">imss.gob.mx/tramites/imss01002</a>. Puedes descargar la solicitud oficial en PDF desde: <a href="https://www.imss.gob.mx/sites/all/statics/pensiones/documentos/Solicitud-de-Pension-de-Cesantia-en-Edad-Avanzada-o-Vejez.pdf" target="_blank" rel="noopener">Formulario de Solicitud de Pensión (PDF)</a>. <strong>Guarda tu acuse de recibo.</strong></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-content">
+        <h3>Recibe tu resolución y empieza a cobrar</h3>
+        <p>El IMSS emitirá una resolución oficial con el monto aprobado. El pago inicia al mes siguiente de la aprobación, mediante depósito bancario directo a tu cuenta CLABE. Si el IMSS emite una <strong>negativa de pensión</strong> por insuficiencia de semanas, puedes retirar los recursos de tu Afore e Infonavit en una sola exhibición.</p>
+      </div>
+    </div>
+
+    <div class="alerta">
+      <strong>📞 Atención IMSS:</strong> Llama al <strong>800 623 2323</strong> (IMSS Digital), lunes a viernes de 7:00 a 20:00 hrs, sin costo desde cualquier teléfono. También puedes escribir a <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7910171f161a1c0a0a3910140a0a571e161b571401">[email&#160;protected]</a></strong> para dudas por correo.
+    </div>
+  </div>
+
+  <!-- DOCUMENTOS -->
+  <div id="documentos" class="section">
+    <div class="section-title">Documentos Necesarios</div>
+    <div class="cards" style="margin-bottom:20px;">
+      <div class="card" style="border-top-color:var(--verde);">
+        <div class="card-icon">👤</div>
+        <h3>Documentos del solicitante</h3>
+        <ul style="padding-left:0;list-style:none;margin-top:10px;">
+          <li style="padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:0.9rem;"><strong>🪪 Identificación oficial vigente</strong><br><span style="color:var(--gris-medio);font-size:0.85rem;">INE, pasaporte o cédula profesional. Original y copia.</span></li>
+          <li style="padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:0.9rem;"><strong>📄 CURP actualizado</strong><br><span style="color:var(--gris-medio);font-size:0.85rem;">Descárgalo gratis en <a href="https://www.gob.mx/curp" target="_blank" rel="noopener">gob.mx/curp</a>.</span></li>
+          <li style="padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:0.9rem;"><strong>📋 Acta de nacimiento</strong><br><span style="color:var(--gris-medio);font-size:0.85rem;">Original y copia. Debe ser legible.</span></li>
+          <li style="padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:0.9rem;"><strong>🏠 Comprobante de domicilio reciente</strong><br><span style="color:var(--gris-medio);font-size:0.85rem;">No mayor a 3 meses (agua, luz, teléfono o gas). Original y copia.</span></li>
+          <li style="padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:0.9rem;"><strong>🏦 Estado de cuenta bancario con CLABE</strong><br><span style="color:var(--gris-medio);font-size:0.85rem;">Para depósito directo. Cuenta a tu nombre.</span></li>
+          <li style="padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:0.9rem;"><strong>🔢 Número de Seguridad Social (NSS)</strong><br><span style="color:var(--gris-medio);font-size:0.85rem;">Está en tu tarjeta IMSS o constancia de semanas cotizadas.</span></li>
+          <li style="padding:8px 0;font-size:0.9rem;"><strong>📊 Estado de cuenta Afore</strong><br><span style="color:var(--gris-medio);font-size:0.85rem;">No obligatorio bajo Ley 73, pero suele solicitarse.</span></li>
+        </ul>
+      </div>
+      <div class="card" style="border-top-color:var(--dorado);">
+        <div class="card-icon">👨‍👩‍👧</div>
+        <h3>Documentos de beneficiarios</h3>
+        <ul style="padding-left:0;list-style:none;margin-top:10px;">
+          <li style="padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:0.9rem;"><strong>💍 Cónyuge o concubina/o</strong><br><span style="color:var(--gris-medio);font-size:0.85rem;">Acta de matrimonio o constancia de concubinato + acta de nacimiento + identificación + CURP + comprobante de domicilio.</span></li>
+          <li style="padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:0.9rem;"><strong>👶 Hijos menores de 16 años</strong><br><span style="color:var(--gris-medio);font-size:0.85rem;">Acta de nacimiento + identificación + comprobante de domicilio.</span></li>
+          <li style="padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:0.9rem;"><strong>🎓 Hijos entre 16 y 25 años</strong><br><span style="color:var(--gris-medio);font-size:0.85rem;">Acta de nacimiento + constancia de estudios vigente.</span></li>
+          <li style="padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:0.9rem;"><strong>♿ Hijos con incapacidad permanente</strong><br><span style="color:var(--gris-medio);font-size:0.85rem;">Acta de nacimiento + dictamen médico de incapacidad del IMSS.</span></li>
+          <li style="padding:8px 0;font-size:0.9rem;"><strong>👴 Padres o ascendientes</strong><br><span style="color:var(--gris-medio);font-size:0.85rem;">Acta de nacimiento + identificación + resolución de dependencia económica.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="alerta-roja">
+      <strong>🚫 Errores documentales frecuentes:</strong> Inconsistencias en el nombre entre el INE y el acta de nacimiento, documentos vencidos, copias sin legibilidad o falta de algún documento de beneficiario son las causas más comunes de retrasos. Revisa todo minuciosamente antes de ir a la Subdelegación.
+    </div>
+  </div>
+
+  <!-- MODALIDAD 40 -->
+  <div id="modalidad40" class="section">
+    <div class="section-title">Modalidad 40 — Cotización Voluntaria</div>
+    <div class="alerta-verde">
+      <strong>💡 ¿Qué es la Modalidad 40?</strong> Es la "Continuación Voluntaria al Régimen Obligatorio". Te permite seguir cotizando al IMSS <strong>aunque ya no tengas patrón</strong>, eligiendo tú mismo el salario con el que cotizas. Es la herramienta más poderosa para aumentar tu pensión Ley 73: eleva tanto tus semanas cotizadas como el salario promedio de los últimos 5 años — los dos factores que más impactan tu pensión. <strong>Solo aplica para Ley 73.</strong>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">✅</div>
+        <h3>Requisitos 2026</h3>
+        <ul style="padding-left:16px;font-size:0.9rem;color:var(--gris-medio);line-height:2.1;">
+          <li>Al menos <strong>52 semanas cotizadas</strong> en los últimos 5 años previos a la baja</li>
+          <li><strong>No han transcurrido más de 5 años</strong> desde tu baja ante el IMSS</li>
+          <li>No tener patrón activo reportándote al IMSS</li>
+          <li>Inscribirse con el <strong>último salario registrado o uno superior</strong> (hasta tope de 25 UMAs)</li>
+          <li>Pagar puntualmente antes del día 17 de cada mes</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top-color:var(--dorado);">
+        <div class="card-icon">💸</div>
+        <h3>Cuota mensual 2026</h3>
+        <p>La aportación mensual 2026 es del <strong>14.438%</strong> del salario base de cotización elegido. Se incrementará gradualmente:</p>
+        <ul style="padding-left:16px;font-size:0.87rem;color:var(--gris-medio);margin-top:8px;line-height:2;">
+          <li>2026: <strong>14.438%</strong></li>
+          <li>2027: 15.526%</li>
+          <li>2028: 16.615%</li>
+          <li>2029: 17.704%</li>
+          <li>2030: <strong>18.800%</strong> (tope máximo)</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top-color:var(--rojo);">
+        <div class="card-icon">⚠️</div>
+        <h3>Advertencias clave</h3>
+        <ul style="padding-left:16px;font-size:0.9rem;color:var(--gris-medio);line-height:2.1;">
+          <li><strong>No incluye servicio médico.</strong> Contratar Modalidad 33 es necesario para atención médica.</li>
+          <li>El salario base elegido <strong>no se puede modificar</strong> después de la inscripción.</li>
+          <li>Si no pagas puntualmente, puedes perder el derecho al esquema.</li>
+          <li>En 2026 el IMSS realiza supervisión más estricta de registros.</li>
+          <li>Si han pasado más de 5 años desde tu baja, ya no puedes inscribirte.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tabla-wrap">
+      <table>
+        <thead><tr><th>Salario mensual elegido</th><th>Cuota mensual aprox. 2026 (14.438%)</th><th>Beneficio en pensión</th></tr></thead>
+        <tbody>
+          <tr><td>$10,000</td><td>~$1,444/mes</td><td>Incremento moderado en promedio salarial</td></tr>
+          <tr><td>$20,000</td><td>~$2,888/mes</td><td>Buen impacto en pensión final</td></tr>
+          <tr><td>$40,000</td><td>~$5,775/mes</td><td>Alto impacto en pensión final</td></tr>
+          <tr><td>$87,982 (tope máximo 25 UMAs)</td><td>~$12,704/mes</td><td>Máximo posible. Pensión potencialmente muy alta</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-title" style="font-size:1.2rem;margin-top:10px;">Cómo inscribirse a la Modalidad 40</div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Vía digital</h3>
+        <p>Ingresa a <a href="https://serviciosdigitales.imss.gob.mx" target="_blank" rel="noopener">serviciosdigitales.imss.gob.mx</a> con tu e.firma o contraseña IMSS. Selecciona: <em>"Solicitud de inscripción en la continuación voluntaria en el régimen obligatorio"</em>. El trámite es gratuito.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Vía presencial</h3>
+        <p>Acude a tu Subdelegación del IMSS con: escrito libre solicitando la inscripción (con firma autógrafa), identificación oficial (original y copia), comprobante de domicilio, CURP y NSS. Solo en trámite presencial puedes cubrir los 12 meses anteriores a tu inscripción de forma retroactiva.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Realiza tu primer pago</h3>
+        <p>El IMSS emitirá una línea de captura. Paga en banco, OXXO o por transferencia SPEI <strong>antes del día 17 del mes</strong>. Guarda siempre el comprobante de pago. El aseguramiento se activa a partir del primer pago confirmado.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESTRATEGIAS -->
+  <div id="estrategias" class="section">
+    <div class="section-title">Estrategias para Maximizar tu Pensión</div>
+    <div class="tips">
+      <div class="tip">
+        <div class="tip-icon">📈</div>
+        <h4>Usa la Modalidad 40 con salario alto</h4>
+        <p>Si puedes pagarlo, cotiza en Modalidad 40 con un salario base más alto que el último que tuviste. Esto eleva el promedio de los últimos 5 años y puede aumentar significativamente tu pensión. Analiza los escenarios antes de comprometerte.</p>
+      </div>
+      <div class="tip">
+        <div class="tip-icon">⏳</div>
+        <h4>Espera a los 65 si puedes</h4>
+        <p>Pensionarte a los 65 en vez de los 60 puede aumentar tu pago mensual hasta un 33%. El punto de equilibrio recomendado por especialistas es entre 62 y 63 años si necesitas jubilarte antes de esa edad.</p>
+      </div>
+      <div class="tip">
+        <div class="tip-icon">🔍</div>
+        <h4>Recupera semanas perdidas</h4>
+        <p>Si tienes periodos trabajados sin alta patronal o semanas no registradas, solicita una "Aclaración de Semanas Cotizadas" ante el IMSS. Necesitarás evidencia: contratos, recibos de nómina o cartas del patrón.</p>
+      </div>
+      <div class="tip">
+        <div class="tip-icon">💼</div>
+        <h4>Exige un SBC correcto a tu patrón</h4>
+        <p>Tu Salario Base de Cotización debe incluir partes proporcionales de aguinaldo (15 días), prima vacacional (25%) y días de vacaciones. Cotizar solo con el sueldo diario reduce ilegalmente tu futura pensión.</p>
+      </div>
+      <div class="tip">
+        <div class="tip-icon">🏦</div>
+        <h4>No retires tu Afore por desempleo</h4>
+        <p>Bajo Ley 73 la pensión la paga el IMSS, pero si retiras fondos de tu Afore por desempleo se descuentan semanas cotizadas de tu historial, reduciendo el cálculo de tu pensión.</p>
+      </div>
+      <div class="tip">
+        <div class="tip-icon">📅</div>
+        <h4>Revisa tu constancia cada año</h4>
+        <p>Revisar tu constancia de semanas al menos una vez al año te permite detectar errores antes de que sea tarde para corregirlos. Descárgala gratis en <strong>serviciosdigitales.imss.gob.mx</strong>.</p>
+      </div>
+    </div>
+    <div class="alerta-verde" style="margin-top:22px;">
+      <strong>🔢 Herramientas oficiales gratuitas:</strong>
+      Simulador de pensión de la CONSAR: <a href="https://www.consar.gob.mx/gobmx/aplicativo/siefore/inicio.aspx" target="_blank" rel="noopener">consar.gob.mx — Calculadora</a> |
+      Mi Pensión Digital del IMSS: <a href="https://www.imss.gob.mx/pensiones" target="_blank" rel="noopener">imss.gob.mx/pensiones</a>
+    </div>
+  </div>
+
+  <!-- ERRORES COMUNES -->
+  <div id="errores" class="section">
+    <div class="section-title">Errores Comunes que Cuestan Mucho Dinero</div>
+    <div class="errores">
+      <div class="error-card">
+        <div class="e-icon">❌</div>
+        <h4>Pensionarse a los 60 sin necesidad</h4>
+        <p>Muchas personas se jubilan a los 60 sin saber que esperar hasta los 63 puede significar ganar entre 15% y 33% más al mes por el resto de su vida.</p>
+      </div>
+      <div class="error-card">
+        <div class="e-icon">❌</div>
+        <h4>No corregir inconsistencias en semanas</h4>
+        <p>Periodos trabajados sin alta patronal o errores de registro no se corrigen solos. Si no los aclaras antes del trámite, pierdes esas semanas para siempre.</p>
+      </div>
+      <div class="error-card">
+        <div class="e-icon">❌</div>
+        <h4>Dejar pasar los 5 años para Modalidad 40</h4>
+        <p>Si pasan más de 5 años desde tu última cotización, pierdes definitivamente el derecho a inscribirte en la Modalidad 40. No hay excepciones.</p>
+      </div>
+      <div class="error-card">
+        <div class="e-icon">❌</div>
+        <h4>No registrar beneficiarios</h4>
+        <p>No tener registrados al cónyuge e hijos puede hacerte perder asignaciones familiares que representan hasta el 35% adicional de tu pensión mensual.</p>
+      </div>
+      <div class="error-card">
+        <div class="e-icon">❌</div>
+        <h4>Cotizar con SBC incorrecto</h4>
+        <p>Aceptar que el patrón te registre sin incluir aguinaldo, vacaciones y prima vacacional en el SBC reduce de forma ilegal tu futura pensión. Puedes reclamar ante el IMSS.</p>
+      </div>
+      <div class="error-card">
+        <div class="e-icon">❌</div>
+        <h4>No pedir el cálculo estimativo previo</h4>
+        <p>Una vez emitida la resolución de pensión, el monto ya no puede modificarse. Pide siempre el estimado al IMSS antes de presentar la solicitud formal.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREGUNTAS FRECUENTES -->
+  <div id="faq" class="section">
+    <div class="section-title">Preguntas Frecuentes</div>
+
+    <div class="faq" onclick="toggleFaq(this)">
+      <div class="faq-q">¿Puedo pensionarme si todavía estoy trabajando? <span class="arrow">▼</span></div>
+      <div class="faq-a">No directamente. Para tramitar la pensión de cesantía o vejez debes haber causado baja del régimen obligatorio del IMSS (no tener patrón activo reportándote). Sin embargo, una vez que ya tienes la pensión aprobada, sí puedes volver a trabajar.</div>
+    </div>
+    <div class="faq" onclick="toggleFaq(this)">
+      <div class="faq-q">¿Qué pasa si no tengo las 500 semanas mínimas? <span class="arrow">▼</span></div>
+      <div class="faq-a">Tienes dos opciones principales: 1) Inscribirte a la Modalidad 40 para seguir acumulando semanas de forma voluntaria (si todavía estás dentro del período de 5 años desde tu última cotización). 2) Si definitivamente no alcanzas las 500 semanas, el IMSS emitirá una negativa de pensión y podrás retirar tus recursos de la Afore e Infonavit en una sola exhibición.</div>
+    </div>
+    <div class="faq" onclick="toggleFaq(this)">
+      <div class="faq-q">¿Cuánto tiempo tarda el trámite de pensión? <span class="arrow">▼</span></div>
+      <div class="faq-a">El tiempo promedio es de 30 a 90 días hábiles desde que presentas la solicitud completa. Puede extenderse si hay inconsistencias en documentos, semanas no verificadas o errores en el expediente. Presentar todo correcto desde el inicio es la mejor forma de agilizarlo.</div>
+    </div>
+    <div class="faq" onclick="toggleFaq(this)">
+      <div class="faq-q">¿Puedo mejorar mi pensión después de que el IMSS emita la resolución? <span class="arrow">▼</span></div>
+      <div class="faq-a">No. Una vez emitida la resolución oficial de pensión, el cálculo ya no puede modificarse. Por eso es fundamental verificar todos los datos, corregir inconsistencias y explorar opciones como la Modalidad 40 antes de iniciar el trámite formal.</div>
+    </div>
+    <div class="faq" onclick="toggleFaq(this)">
+      <div class="faq-q">¿La pensión está sujeta a impuestos (ISR)? <span class="arrow">▼</span></div>
+      <div class="faq-a">Las pensiones bajo Ley 73 del IMSS están exentas del Impuesto Sobre la Renta (ISR) siempre que no superen 15 veces el salario mínimo general vigente. La gran mayoría de los pensionados no paga ISR sobre su pensión.</div>
+    </div>
+    <div class="faq" onclick="toggleFaq(this)">
+      <div class="faq-q">¿Qué pasa con mi familia si fallezco? ¿Quedan desprotegidos? <span class="arrow">▼</span></div>
+      <div class="faq-a">No. La Ley 73 protege a tu familia: el cónyuge o concubino/a recibirá una pensión de viudez (90% de tu pensión). Los hijos menores de 16 años (o hasta 25 si estudian) recibirán pensión de orfandad. Además existe una "ayuda para gastos de funeral" que se paga de inmediato a los beneficiarios.</div>
+    </div>
+    <div class="faq" onclick="toggleFaq(this)">
+      <div class="faq-q">¿Puedo elegir entre Ley 73 y Ley 97 si cotice en ambos periodos? <span class="arrow">▼</span></div>
+      <div class="faq-a">Sí. Si comenzaste antes del 1 de julio de 1997 y también tienes semanas cotizadas después de esa fecha, el IMSS puede calcular tu pensión bajo ambos regímenes. Tienes derecho a elegir el que te resulte más favorable, que en la mayoría de los casos es la Ley 73.</div>
+    </div>
+    <div class="faq" onclick="toggleFaq(this)">
+      <div class="faq-q">¿Cómo se actualiza el monto de mi pensión cada año? <span class="arrow">▼</span></div>
+      <div class="faq-a">Las pensiones bajo Ley 73 se actualizan cada febrero conforme al INPC (inflación del año anterior). En 2026, el ajuste estimado fue de entre 3.7% y 4%. Esta actualización busca que no pierdas poder adquisitivo a lo largo del tiempo. No existe otro mecanismo oficial de aumento.</div>
+    </div>
+    <div class="faq" onclick="toggleFaq(this)">
+      <div class="faq-q">¿La Modalidad 40 incluye servicio médico del IMSS? <span class="arrow">▼</span></div>
+      <div class="faq-a">No. La Modalidad 40 solo cubre los seguros de Retiro, Cesantía en edad avanzada y Vejez (RCV). Si necesitas atención médica del IMSS, debes contratar el Seguro de Salud para la Familia (Modalidad 33) por separado.</div>
+    </div>
+    <div class="faq" onclick="toggleFaq(this)">
+      <div class="faq-q">¿Puede el patrón negarme el alta en el IMSS desde el primer día? <span class="arrow">▼</span></div>
+      <div class="faq-a">No. La ley obliga al patrón a registrarte ante el IMSS desde el primer día laborado, con tu salario real. Si el patrón no lo hace, comete una infracción. Puedes denunciarlo de forma anónima ante el IMSS o la STPS. Esto afecta directamente tus semanas cotizadas y tu futura pensión.</div>
+    </div>
+  </div>
+
+  <!-- LINKS OFICIALES -->
+  <div id="links" class="section">
+    <div class="section-title">Portales Oficiales y Recursos Útiles</div>
+    <div class="links-grid">
+      <a href="https://www.imss.gob.mx/pensiones" target="_blank" rel="noopener" class="link-card">
+        <div class="link-icon">🏛️</div>
+        <div class="link-text"><h4>IMSS — Pensiones</h4><p>Guías, documentos y herramientas para tramitar tu pensión en el portal oficial</p></div>
+      </a>
+      <a href="https://serviciosdigitales.imss.gob.mx" target="_blank" rel="noopener" class="link-card">
+        <div class="link-icon">💻</div>
+        <div class="link-text"><h4>IMSS Servicios Digitales</h4><p>Consulta semanas cotizadas, inscríbete a Modalidad 40 y realiza trámites en línea</p></div>
+      </a>
+      <a href="https://www.imss.gob.mx/tramites/imss01002" target="_blank" rel="noopener" class="link-card">
+        <div class="link-icon">📝</div>
+        <div class="link-text"><h4>Trámite de Pensión en Línea</h4><p>Solicitud oficial de pensión de cesantía o vejez en el portal del IMSS</p></div>
+      </a>
+      <a href="https://www.imss.gob.mx/sites/all/statics/pensiones/documentos/Solicitud-de-Pension-de-Cesantia-en-Edad-Avanzada-o-Vejez.pdf" target="_blank" rel="noopener" class="link-card">
+        <div class="link-icon">📥</div>
+        <div class="link-text"><h4>Formulario de Pensión (PDF)</h4><p>Descarga la solicitud oficial de pensión de cesantía o vejez del IMSS</p></div>
+      </a>
+      <a href="https://www.imss.gob.mx/sites/all/statics/pensiones/Guia-Tramitar-Pension.pdf" target="_blank" rel="noopener" class="link-card">
+        <div class="link-icon">📖</div>
+        <div class="link-text"><h4>Guía Oficial IMSS (PDF)</h4><p>Guía completa para tramitar tu pensión, directamente del IMSS</p></div>
+      </a>
+      <a href="https://www.gob.mx/curp" target="_blank" rel="noopener" class="link-card">
+        <div class="link-icon">📄</div>
+        <div class="link-text"><h4>Constancia de CURP</h4><p>Descarga o imprime tu CURP actualizado en el portal del Gobierno federal</p></div>
+      </a>
+      <a href="https://www.consar.gob.mx/gobmx/aplicativo/siefore/inicio.aspx" target="_blank" rel="noopener" class="link-card">
+        <div class="link-icon">🔢</div>
+        <div class="link-text"><h4>Calculadora CONSAR</h4><p>Simulador oficial gratuito de pensión de la Comisión Nacional del Sistema de Ahorro para el Retiro</p></div>
+      </a>
+      <a href="https://www.imss.gob.mx/directorio" target="_blank" rel="noopener" class="link-card">
+        <div class="link-icon">🗺️</div>
+        <div class="link-text"><h4>Directorio IMSS — Ubica tu Subdelegación</h4><p>Encuentra la Subdelegación o Unidad de Medicina Familiar más cercana a tu domicilio</p></div>
+      </a>
+    </div>
+
+    <div class="alerta" style="margin-top:20px;">
+      <strong>📞 Teléfono IMSS:</strong> <strong>800 623 2323</strong> — lunes a viernes de 7:00 a 20:00 hrs, sin costo.<br>
+      <strong>✉️ Correo:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="93fafdf5fcf0f6e0e0d3fafee0e0bdf4fcf1bdfeeb">[email&#160;protected]</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <strong>Guía de Pensión "Ley 73" — por Carlos Serrano · México 2026</strong><br>
+  Esta guía es orientativa. Para trámites oficiales y cálculos definitivos consulta siempre con el IMSS.<br>
+  <a href="https://www.imss.gob.mx" target="_blank" rel="noopener">imss.gob.mx</a> &nbsp;|&nbsp;
+  <a href="https://serviciosdigitales.imss.gob.mx" target="_blank" rel="noopener">serviciosdigitales.imss.gob.mx</a> &nbsp;|&nbsp;
+  <a href="https://www.consar.gob.mx" target="_blank" rel="noopener">consar.gob.mx</a><br><br>
+  Fuentes: IMSS, CONSAR, Tec de Monterrey, Infobae México, Excélsior, UnoTV, Milenio · Actualizada a marzo 2026.
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function calcular() {
+  const salario = parseFloat(document.getElementById('salario').value);
+  const semanas = parseInt(document.getElementById('semanas').value);
+  const factorEdad = parseFloat(document.getElementById('edad').value);
+  const factorFamiliar = parseFloat(document.getElementById('familiar').value);
+
+  if (!salario || salario <= 0 || !semanas || semanas < 500) {
+    alert('Por favor ingresa un salario válido y al menos 500 semanas cotizadas.');
+    return;
+  }
+  const semanasExtra = Math.max(0, semanas - 500);
+  const anosExtra = Math.floor(semanasExtra / 52);
+  const cuantiaBasicaPct = 0.13;
+  const incrementoPct = anosExtra * 0.0245;
+  const totalCuantiaPct = cuantiaBasicaPct + incrementoPct;
+  const pensionBase = salario * totalCuantiaPct;
+  const conFamiliar = pensionBase * (1 + factorFamiliar);
+  const conDecreto = conFamiliar * 1.11;
+  let pension = conDecreto * factorEdad;
+
+  const minimo = 10636.54;
+  const aplicoMinimo = pension < minimo;
+  const penFinal = Math.max(pension, minimo);
+
+  document.getElementById('monto-result').textContent = '$' + penFinal.toLocaleString('es-MX', {minimumFractionDigits:2, maximumFractionDigits:2});
+  document.getElementById('cuantia-r').textContent = '$' + (salario * cuantiaBasicaPct).toLocaleString('es-MX', {minimumFractionDigits:0, maximumFractionDigits:0});
+  document.getElementById('incremento-r').textContent = (incrementoPct * 100).toFixed(2) + '% (' + anosExtra + ' años extra)';
+  document.getElementById('edad-r').textContent = (factorEdad * 100).toFixed(0) + '%';
+  document.getElementById('familiar-r').textContent = '+' + (factorFamilia
