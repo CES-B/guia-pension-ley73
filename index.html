@@ -173,6 +173,17 @@
   <meta name="twitter:title" content="Guía de Pensión Ley 73 - Carlos Serrano"/>
   <meta name="twitter:image" content="https://ces-b.github.io/guia-pension-ley73/og-image.png"/>
 <script>
+function cargarContadorLocal() {
+  // Contador local con localStorage como respaldo visual
+  try {
+    var key = 'visitas_ley73';
+    var v = parseInt(localStorage.getItem(key) || '0') + 1;
+    localStorage.setItem(key, v);
+    var el = document.getElementById('visitas-local');
+    if (el) el.textContent = v.toLocaleString('es-MX') + ' visitas';
+  } catch(e) {}
+}
+
 function validarSalario(input) {
   var v = parseFloat(input.value);
   var err = document.getElementById('error-salario');
@@ -1530,13 +1541,23 @@ function calcular() {
 </div>
 
 <footer>
+  <!-- CONTADOR DE VISITAS -->
+  <div style="background:rgba(255,255,255,0.08);border-radius:14px;padding:18px;margin-bottom:20px;display:inline-block;min-width:220px;">
+    <div style="font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:6px;">👁️ Visitas totales</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
+      <img src="https://hits.sh/ces-b.github.io/guia-pension-ley73.svg?style=flat-square&label=visitas&color=006847&labelColor=004a31&extraCount=0" 
+           alt="Contador de visitas" 
+           style="height:28px;border-radius:6px;"
+           onerror="this.parentElement.innerHTML='<span style=\'font-size:1.4rem;font-weight:700;color:var(--dorado-claro)\' id=\'visitas-local\'>Cargando...</span>';cargarContadorLocal();">
+    </div>
+  </div>
+  <br>
   <strong>Guía de Pensión "Ley 73" — por Carlos Serrano · México 2026</strong><br>
   Esta guía es orientativa. Para trámites oficiales y cálculos definitivos consulta siempre con el IMSS.<br>
   <a href="https://www.imss.gob.mx" target="_blank" rel="noopener">imss.gob.mx</a> &nbsp;|&nbsp;
   <a href="https://serviciosdigitales.imss.gob.mx" target="_blank" rel="noopener">serviciosdigitales.imss.gob.mx</a> &nbsp;|&nbsp;
   <a href="https://www.consar.gob.mx" target="_blank" rel="noopener">consar.gob.mx</a><br><br>
   Fuentes: IMSS, CONSAR, Tec de Monterrey, Infobae México, Excélsior, UnoTV, Milenio · Actualizada a marzo 2026.
-</footer>
 </footer>
 </body>
 </html>
