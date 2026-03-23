@@ -4,9 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guía de Pensión "Ley 73" — por Carlos Serrano</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
+  /* Fuentes elegantes del sistema — funcionan sin internet en cualquier dispositivo */
+  @font-face {
+    font-family: 'DisplayFont';
+    src: local('Georgia'), local('Times New Roman'), local('serif');
+  }
+
   :root {
+    --font-display: Georgia, 'Times New Roman', 'Palatino Linotype', Palatino, serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     --verde: #006847;
     --verde-claro: #00a86b;
     --rojo: #c8102e;
@@ -18,7 +25,20 @@
     --blanco: #ffffff;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Source Sans 3', sans-serif; background: var(--crema); color: var(--gris); line-height: 1.6; }
+  body { 
+    font-family: var(--font-body); 
+    background: var(--crema); 
+    color: var(--gris); 
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  /* Aplicar fuente display a todos los títulos */
+  h1, h2, h3, h4, h5, h6,
+  .hero h1, .section-title, .calc-box h3,
+  [style*="font-display"], [style*="Playfair"] {
+    font-family: var(--font-display) !important;
+  }
 
   .nav {
     background: #004a31; position: sticky; top: 0; z-index: 100;
@@ -39,7 +59,7 @@
   .hero::before { content:''; position:absolute; top:-60px; right:-60px; width:300px; height:300px; border-radius:50%; background:rgba(201,168,76,0.15); }
   .hero::after  { content:''; position:absolute; bottom:-80px; left:-40px; width:250px; height:250px; border-radius:50%; background:rgba(255,255,255,0.05); }
   .hero-badge { display:inline-block; background:var(--dorado); color:var(--gris); font-size:11px; font-weight:600; letter-spacing:3px; text-transform:uppercase; padding:6px 18px; border-radius:20px; margin-bottom:20px; }
-  .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.5rem); font-weight:900; line-height:1.1; margin-bottom:16px; }
+  .hero h1 { font-family:var(--font-display); font-size:clamp(2rem,5vw,3.5rem); font-weight:900; line-height:1.1; margin-bottom:16px; }
   .hero h1 span { color:var(--dorado-claro); }
   .hero p { font-size:1.1rem; font-weight:300; max-width:580px; margin:0 auto; opacity:0.9; }
 
@@ -51,33 +71,33 @@
 
   .container { max-width:880px; margin:0 auto; padding:0 20px; }
   .section { padding:50px 0 30px; }
-  .section-title { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; color:var(--verde); border-left:5px solid var(--dorado); padding-left:16px; margin-bottom:24px; }
+  .section-title { font-family:var(--font-display); font-size:1.8rem; font-weight:700; color:var(--verde); border-left:5px solid var(--dorado); padding-left:16px; margin-bottom:24px; }
 
   .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:18px; margin-bottom:24px; }
   .card { background:white; border-radius:12px; padding:24px; box-shadow:0 2px 12px rgba(0,0,0,0.07); border-top:4px solid var(--verde-claro); transition:transform 0.2s,box-shadow 0.2s; }
   .card:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,0,0,0.12); }
   .card-icon { font-size:2rem; margin-bottom:10px; }
-  .card h3 { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--verde); margin-bottom:7px; }
+  .card h3 { font-family:var(--font-display); font-size:1.05rem; color:var(--verde); margin-bottom:7px; }
   .card p { font-size:0.93rem; color:var(--gris-medio); }
   .card .highlight { font-size:1.5rem; font-weight:700; color:var(--verde); display:block; margin-top:8px; }
 
   .step { display:flex; gap:18px; margin-bottom:18px; background:white; border-radius:12px; padding:20px 22px; box-shadow:0 2px 10px rgba(0,0,0,0.06); }
-  .step-num { width:42px; height:42px; min-width:42px; border-radius:50%; background:var(--verde); color:white; font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; display:flex; align-items:center; justify-content:center; }
-  .step-content h3 { font-family:'Playfair Display',serif; font-size:1rem; color:var(--gris); margin-bottom:5px; }
+  .step-num { width:42px; height:42px; min-width:42px; border-radius:50%; background:var(--verde); color:white; font-family:var(--font-display); font-size:1.1rem; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .step-content h3 { font-family:var(--font-display); font-size:1rem; color:var(--gris); margin-bottom:5px; }
   .step-content p { font-size:0.92rem; color:var(--gris-medio); }
   .step-content a { color:var(--verde); font-weight:600; }
 
   .calc-box { background:white; border-radius:16px; padding:32px; box-shadow:0 4px 20px rgba(0,0,0,0.08); border:2px solid var(--dorado-claro); }
-  .calc-box h3 { font-family:'Playfair Display',serif; font-size:1.35rem; color:var(--verde); margin-bottom:20px; text-align:center; }
+  .calc-box h3 { font-family:var(--font-display); font-size:1.35rem; color:var(--verde); margin-bottom:20px; text-align:center; }
   .form-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-bottom:14px; }
   .form-group label { display:block; font-size:0.83rem; font-weight:600; color:var(--gris-medio); letter-spacing:0.4px; margin-bottom:5px; }
-  .form-group input, .form-group select { width:100%; padding:10px 13px; border:1.5px solid #ddd; border-radius:8px; font-size:0.95rem; font-family:'Source Sans 3',sans-serif; color:var(--gris); outline:none; transition:border-color 0.2s; background:white; }
+  .form-group input, .form-group select { width:100%; padding:10px 13px; border:1.5px solid #ddd; border-radius:8px; font-size:0.95rem; font-family:var(--font-body); color:var(--gris); outline:none; transition:border-color 0.2s; background:white; }
   .form-group input:focus,.form-group select:focus { border-color:var(--verde); }
-  .btn-calc { width:100%; padding:14px; background:linear-gradient(135deg,var(--verde),var(--verde-claro)); color:white; border:none; border-radius:10px; font-size:1rem; font-weight:600; font-family:'Source Sans 3',sans-serif; cursor:pointer; margin-top:6px; transition:opacity 0.2s,transform 0.15s; }
+  .btn-calc { width:100%; padding:14px; background:linear-gradient(135deg,var(--verde),var(--verde-claro)); color:white; border:none; border-radius:10px; font-size:1rem; font-weight:600; font-family:var(--font-body); cursor:pointer; margin-top:6px; transition:opacity 0.2s,transform 0.15s; }
   .btn-calc:hover { opacity:0.91; transform:translateY(-1px); }
   .resultado { display:none; margin-top:22px; background:linear-gradient(135deg,var(--verde) 0%,#004a31 100%); border-radius:12px; padding:24px; color:white; text-align:center; animation:fadeIn 0.4s ease; }
   .resultado.visible { display:block; }
-  .resultado .monto { font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--dorado-claro); }
+  .resultado .monto { font-family:var(--font-display); font-size:2.5rem; font-weight:900; color:var(--dorado-claro); }
   .resultado .label { font-size:0.88rem; opacity:0.8; margin-bottom:4px; }
   .resultado .nota { font-size:0.81rem; opacity:0.7; margin-top:12px; line-height:1.5; }
   .resultado-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0; text-align:left; }
@@ -98,7 +118,7 @@
   .tips { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:15px; }
   .tip { background:white; border-radius:12px; padding:20px; box-shadow:0 2px 10px rgba(0,0,0,0.06); border-left:4px solid var(--dorado); }
   .tip-icon { font-size:1.4rem; margin-bottom:7px; }
-  .tip h4 { font-family:'Playfair Display',serif; font-size:0.97rem; margin-bottom:5px; color:var(--verde); }
+  .tip h4 { font-family:var(--font-display); font-size:0.97rem; margin-bottom:5px; color:var(--verde); }
   .tip p { font-size:0.87rem; color:var(--gris-medio); }
 
   .alerta { background:#fff8e1; border-left:4px solid var(--dorado); border-radius:0 10px 10px 0; padding:15px 18px; margin:18px 0; font-size:0.92rem; color:#5a4200; }
@@ -153,21 +173,97 @@
   <meta name="twitter:title" content="Guía de Pensión Ley 73 - Carlos Serrano"/>
   <meta name="twitter:image" content="https://ces-b.github.io/guia-pension-ley73/og-image.png"/>
 <script>
+function validarSalario(input) {
+  var v = parseFloat(input.value);
+  var err = document.getElementById('error-salario');
+  var ok = document.getElementById('salario-ok');
+  err.style.display = 'none';
+  ok.style.display = 'none';
+  if (!input.value) return;
+  if (v <= 0) {
+    err.textContent = '❌ El salario debe ser mayor a $0.';
+    err.style.display = 'block';
+  } else if (v > 87982) {
+    err.textContent = '⚠️ El tope máximo de cotización es $87,982/mes (25 UMAs en 2026). El IMSS calculará tu pensión con ese tope aunque ganes más.';
+    err.style.display = 'block';
+  } else {
+    var nivel = v <= 10000 ? 'Salario bajo' : v <= 25000 ? 'Salario medio' : v <= 50000 ? 'Salario medio-alto' : 'Salario alto';
+    ok.textContent = '✅ $' + v.toLocaleString('es-MX') + '/mes registrado — ' + nivel;
+    ok.style.display = 'block';
+  }
+}
+
+function validarSemanas(input) {
+  var v = parseInt(input.value);
+  var err = document.getElementById('error-semanas');
+  var ok = document.getElementById('semanas-ok');
+  err.style.display = 'none';
+  ok.style.display = 'none';
+  if (!input.value) return;
+  if (v < 500) {
+    err.textContent = '❌ Mínimo: 500 semanas (≈10 años). Con menos semanas el IMSS emite negativa de pensión.';
+    err.style.display = 'block';
+  } else if (v > 2600) {
+    err.textContent = '⚠️ El máximo razonable es 2,600 semanas (≈50 años). Verifica tu dato.';
+    err.style.display = 'block';
+  } else {
+    var anos = (v / 52).toFixed(1);
+    var cuantia = (13 + Math.floor((v-500)/52)*2.45).toFixed(2);
+    ok.textContent = '✅ ' + v + ' semanas ≈ ' + anos + ' años cotizados → Cuantía estimada: ' + cuantia + '%';
+    ok.style.display = 'block';
+  }
+}
+
 function calcular() {
   var salario = parseFloat(document.getElementById('salario').value);
   var semanas = parseInt(document.getElementById('semanas').value);
   var factorEdad = parseFloat(document.getElementById('edad').value);
   var factorFamiliar = parseFloat(document.getElementById('familiar').value);
-  if (!salario || salario <= 0 || !semanas || semanas < 500) {
-    alert('Por favor ingresa un salario válido y al menos 500 semanas cotizadas.');
+
+  // Limpiar mensajes anteriores
+  document.getElementById('error-semanas').style.display = 'none';
+  document.getElementById('error-salario').style.display = 'none';
+
+  // Validar salario
+  if (!salario || salario <= 0) {
+    document.getElementById('error-salario').textContent = '❌ Ingresa un salario válido mayor a $0.';
+    document.getElementById('error-salario').style.display = 'block';
+    document.getElementById('salario').focus();
     return;
   }
+  // Si el salario supera el tope, usar el tope máximo para el cálculo
+  var salarioCalculo = Math.min(salario, 87982);
+  if (salario > 87982) {
+    document.getElementById('error-salario').textContent = '⚠️ Tu salario supera el tope de $87,982. El cálculo se hará con el tope máximo permitido por el IMSS.';
+    document.getElementById('error-salario').style.display = 'block';
+  }
+
+  // Validar semanas — mínimo 500, máximo 2600 (~50 años)
+  if (!semanas || isNaN(semanas)) {
+    document.getElementById('error-semanas').textContent = '⚠️ Ingresa el número de semanas cotizadas.';
+    document.getElementById('error-semanas').style.display = 'block';
+    document.getElementById('semanas').focus();
+    return;
+  }
+  if (semanas < 500) {
+    document.getElementById('error-semanas').textContent = '❌ Mínimo requerido: 500 semanas (≈10 años). Con menos semanas el IMSS emite negativa de pensión. Considera la Modalidad 40 para completarlas.';
+    document.getElementById('error-semanas').style.display = 'block';
+    document.getElementById('semanas').focus();
+    return;
+  }
+  if (semanas > 2600) {
+    document.getElementById('error-semanas').textContent = '⚠️ El máximo razonable es 2,600 semanas (≈50 años). Verifica tu dato.';
+    document.getElementById('error-semanas').style.display = 'block';
+    document.getElementById('semanas').focus();
+    return;
+  }
+
   var semanasExtra = Math.max(0, semanas - 500);
   var anosExtra = Math.floor(semanasExtra / 52);
   var cuantiaBasicaPct = 0.13;
   var incrementoPct = anosExtra * 0.0245;
   var totalCuantiaPct = cuantiaBasicaPct + incrementoPct;
-  var pensionBase = salario * totalCuantiaPct;
+  var pensionBase = salarioCalculo * totalCuantiaPct;
   var conFamiliar = pensionBase * (1 + factorFamiliar);
   var conDecreto = conFamiliar * 1.11;
   var pension = conDecreto * factorEdad;
@@ -175,10 +271,11 @@ function calcular() {
   var aplicoMinimo = pension < minimo;
   var penFinal = Math.max(pension, minimo);
   document.getElementById('monto-result').textContent = '$' + penFinal.toLocaleString('es-MX', {minimumFractionDigits:2, maximumFractionDigits:2});
-  document.getElementById('cuantia-r').textContent = '$' + (salario * cuantiaBasicaPct).toLocaleString('es-MX', {minimumFractionDigits:0, maximumFractionDigits:0});
+  document.getElementById('cuantia-r').textContent = '$' + (salarioCalculo * cuantiaBasicaPct).toLocaleString('es-MX', {minimumFractionDigits:0, maximumFractionDigits:0});
   document.getElementById('incremento-r').textContent = (incrementoPct * 100).toFixed(2) + '% (' + anosExtra + ' años extra)';
   document.getElementById('edad-r').textContent = (factorEdad * 100).toFixed(0) + '%';
   document.getElementById('familiar-r').textContent = '+' + (factorFamiliar * 100).toFixed(0) + '%';
+  document.getElementById('semanas-r').textContent = semanas + ' semanas';
   document.getElementById('minimo-aviso').style.display = aplicoMinimo ? 'block' : 'none';
   var res = document.getElementById('resultado');
   res.classList.add('visible');
@@ -200,6 +297,7 @@ function calcular() {
 <div class="bandera"><div class="b-verde"></div><div class="b-blanco"></div><div class="b-rojo"></div></div>
 
 <nav class="nav">
+  <a href="javascript:void(0)" onclick="document.getElementById('verificar').scrollIntoView({behavior:'smooth'})" style="color:#a8e6cf;border-bottom-color:#a8e6cf;">🔍 ¿Soy Ley 73?</a>
   <a href="javascript:void(0)" onclick="document.getElementById('que-es').scrollIntoView({behavior:'smooth'})">¿Qué es?</a>
   <a href="javascript:void(0)" onclick="document.getElementById('requisitos').scrollIntoView({behavior:'smooth'})">Requisitos</a>
   <a href="javascript:void(0)" onclick="document.getElementById('formula').scrollIntoView({behavior:'smooth'})">Cómo se calcula</a>
@@ -216,7 +314,179 @@ function calcular() {
 
 <div class="container">
 
-  <!-- ¿QUÉ ES? -->
+  <!-- ¿SOY LEY 73? — VERIFICACIÓN -->
+  <div class="section" id="verificar">
+
+    <!-- HERO VERIFICACIÓN -->
+    <div style="background:linear-gradient(135deg,#00291a 0%,#004a31 50%,#006847 100%);border-radius:20px;padding:32px;color:white;text-align:center;margin-bottom:28px;position:relative;overflow:hidden;border:2px solid rgba(201,168,76,0.3);">
+      <div style="position:absolute;top:-50px;right:-50px;width:200px;height:200px;border-radius:50%;background:rgba(201,168,76,0.08);"></div>
+      <div style="position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,0.04);"></div>
+      <div style="font-size:3.5rem;margin-bottom:12px;">🔍</div>
+      <div style="display:inline-block;background:var(--dorado);color:#1a1a1a;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:5px 18px;border-radius:20px;margin-bottom:14px;">Primer paso — Lo más importante</div>
+      <h2 style="font-family:var(--font-display);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;margin-bottom:14px;">¿Cómo saber si soy<br>acreedor a la Ley 73?</h2>
+      <p style="font-size:0.97rem;opacity:0.88;max-width:560px;margin:0 auto;line-height:1.75;">Antes de cualquier trámite o cálculo, <strong style="color:var(--dorado-claro);">verifica si tienes derecho</strong> a esta ley. Es rápido, gratuito y puede cambiar completamente tu panorama de retiro.</p>
+    </div>
+
+    <!-- LA FECHA CLAVE -->
+    <div style="background:white;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin-bottom:24px;border-left:6px solid var(--dorado);text-align:center;">
+      <div style="font-size:0.8rem;font-weight:700;color:var(--gris-medio);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">La fecha que define todo</div>
+      <div style="font-family:var(--font-display);font-size:clamp(1.4rem,4vw,2rem);font-weight:900;color:var(--verde);margin-bottom:8px;">1° de julio de 1997</div>
+      <p style="font-size:0.93rem;color:var(--gris-medio);max-width:500px;margin:0 auto;">Si tu <strong>primera alta ante el IMSS</strong> fue <strong>antes</strong> de esta fecha, eres Ley 73. Si fue <strong>después</strong>, eres Ley 97 (Afore).</p>
+    </div>
+
+    <!-- RESULTADO POSIBLE -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:28px;">
+      <div style="background:linear-gradient(135deg,#e8f5ee,#f0faf5);border:2px solid var(--verde-claro);border-radius:14px;padding:22px;text-align:center;">
+        <div style="font-size:2.5rem;margin-bottom:10px;">✅</div>
+        <div style="font-size:0.75rem;font-weight:700;color:var(--verde);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Primera alta antes del 1-jul-1997</div>
+        <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:900;color:var(--verde);margin-bottom:8px;">¡Eres Ley 73!</div>
+        <p style="font-size:0.85rem;color:var(--gris-medio);">Tienes derecho a pensión basada en semanas y salario. Esta guía es para ti.</p>
+      </div>
+      <div style="background:linear-gradient(135deg,#fff0f0,#fff8f8);border:2px solid #ffb3b3;border-radius:14px;padding:22px;text-align:center;">
+        <div style="font-size:2.5rem;margin-bottom:10px;">📋</div>
+        <div style="font-size:0.75rem;font-weight:700;color:var(--rojo);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Primera alta después del 1-jul-1997</div>
+        <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:900;color:var(--rojo);margin-bottom:8px;">Eres Ley 97</div>
+        <p style="font-size:0.85rem;color:var(--gris-medio);">Tu pensión depende del saldo acumulado en tu Afore. Consulta con la CONSAR.</p>
+      </div>
+      <div style="background:linear-gradient(135deg,#fff8e1,#fffdf0);border:2px solid var(--dorado);border-radius:14px;padding:22px;text-align:center;">
+        <div style="font-size:2.5rem;margin-bottom:10px;">⭐</div>
+        <div style="font-size:0.75rem;font-weight:700;color:#7a5800;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Tienes altas en ambos periodos</div>
+        <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:900;color:#7a5800;margin-bottom:8px;">¡Puedes elegir!</div>
+        <p style="font-size:0.85rem;color:var(--gris-medio);">El IMSS calcula ambas opciones y tienes derecho a elegir la más favorable — casi siempre es la Ley 73.</p>
+      </div>
+    </div>
+
+    <!-- CÓMO VERIFICAR — PASOS -->
+    <div style="margin-bottom:24px;">
+      <h3 style="font-family:var(--font-display);font-size:1.25rem;color:var(--verde);margin-bottom:18px;padding-left:14px;border-left:4px solid var(--dorado);">📱 Cómo verificarlo en 3 minutos desde tu celular</h3>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Entra al portal del IMSS</h3>
+          <p>Abre tu navegador y ve a <a href="https://serviciosdigitales.imss.gob.mx" target="_blank" rel="noopener">serviciosdigitales.imss.gob.mx</a>. Toca <strong>"Iniciar sesión"</strong>. Si es tu primera vez, crea tu cuenta con tu NSS (Número de Seguridad Social) y CURP. Es completamente <strong>gratuito</strong>.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Descarga tu Constancia de Semanas Cotizadas</h3>
+          <p>Dentro del portal busca <strong>"Semanas cotizadas"</strong> o <strong>"Constancia de semanas cotizadas"</strong>. El sistema la genera automáticamente en PDF y la envía a tu correo registrado. Descárgala y ábrela.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Busca la fecha de tu primer alta</h3>
+          <p>En el PDF busca el campo que dice <strong>"Fecha de alta"</strong> o <strong>"Primer registro"</strong> en el listado de patrones. El primer empleador que aparece tiene la fecha más antigua. Si esa fecha es <strong>anterior al 1 de julio de 1997</strong> → eres Ley 73.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FORMA PRESENCIAL -->
+    <div style="background:white;border-radius:14px;padding:22px;box-shadow:0 2px 12px rgba(0,0,0,0.07);margin-bottom:24px;">
+      <h3 style="font-family:var(--font-display);font-size:1.1rem;color:var(--verde);margin-bottom:14px;">🏥 ¿Sin internet? Ve presencialmente</h3>
+      <p style="font-size:0.92rem;color:var(--gris-medio);margin-bottom:14px;">Acude a tu <strong>Unidad de Medicina Familiar (UMF)</strong> o <strong>Subdelegación IMSS</strong> más cercana y solicita en ventanilla:</p>
+      <div style="background:#f5f9f7;border-radius:10px;padding:14px;font-size:0.9rem;color:var(--gris);border-left:3px solid var(--verde);">
+        <strong>"Constancia de semanas cotizadas y fecha de primer alta ante el IMSS"</strong>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:14px;">
+        <div style="background:#f5f9f7;border-radius:8px;padding:10px;text-align:center;font-size:0.85rem;">
+          <div style="font-size:1.2rem;margin-bottom:4px;">🪪</div>
+          <div style="font-weight:600;color:var(--gris);">Identificación oficial</div>
+          <div style="color:var(--gris-medio);font-size:0.8rem;">INE o pasaporte</div>
+        </div>
+        <div style="background:#f5f9f7;border-radius:8px;padding:10px;text-align:center;font-size:0.85rem;">
+          <div style="font-size:1.2rem;margin-bottom:4px;">📄</div>
+          <div style="font-weight:600;color:var(--gris);">CURP</div>
+          <div style="color:var(--gris-medio);font-size:0.8rem;">Impreso o en celular</div>
+        </div>
+        <div style="background:#f5f9f7;border-radius:8px;padding:10px;text-align:center;font-size:0.85rem;">
+          <div style="font-size:1.2rem;margin-bottom:4px;">🔢</div>
+          <div style="font-weight:600;color:var(--gris);">NSS</div>
+          <div style="color:var(--gris-medio);font-size:0.8rem;">Si lo tienes a la mano</div>
+        </div>
+        <div style="background:#f5f9f7;border-radius:8px;padding:10px;text-align:center;font-size:0.85rem;">
+          <div style="font-size:1.2rem;margin-bottom:4px;">💰</div>
+          <div style="font-weight:600;color:var(--gris);">Costo</div>
+          <div style="color:var(--verde);font-size:0.8rem;font-weight:700;">Completamente gratis</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASOS ESPECIALES -->
+    <div style="margin-bottom:24px;">
+      <h3 style="font-family:var(--font-display);font-size:1.1rem;color:var(--verde);margin-bottom:14px;padding-left:14px;border-left:4px solid var(--dorado);">⚠️ Casos especiales — Situaciones que mucha gente no sabe</h3>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="background:white;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;gap:14px;align-items:flex-start;">
+          <span style="font-size:1.3rem;min-width:28px;">👶</span>
+          <div>
+            <strong style="font-size:0.93rem;">Trabajé de joven pero no recuerdo bien</strong>
+            <p style="font-size:0.87rem;color:var(--gris-medio);margin-top:4px;">Si tuviste cualquier empleo formal antes de 1997 — aunque sea de verano, temporal o de pocos meses — <strong>puede aparecer en tu constancia</strong>. Muchas personas descubren semanas que olvidaron. Siempre vale la pena verificar.</p>
+          </div>
+        </div>
+        <div style="background:white;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;gap:14px;align-items:flex-start;">
+          <span style="font-size:1.3rem;min-width:28px;">🏫</span>
+          <div>
+            <strong style="font-size:0.93rem;">Trabajé en gobierno, escuela o empresa paraestatal</strong>
+            <p style="font-size:0.87rem;color:var(--gris-medio);margin-top:4px;">Los trabajadores del sector público, maestros del ISSSTE y empleados de empresas paraestatales como Pemex o CFE tienen <strong>su propio sistema</strong> (ISSSTE o régimen especial). No aplica el IMSS en esos casos — consulta directamente con tu institución.</p>
+          </div>
+        </div>
+        <div style="background:white;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;gap:14px;align-items:flex-start;">
+          <span style="font-size:1.3rem;min-width:28px;">🏠</span>
+          <div>
+            <strong style="font-size:0.93rem;">Trabajé en el hogar o de manera informal</strong>
+            <p style="font-size:0.87rem;color:var(--gris-medio);margin-top:4px;">El trabajo doméstico o informal <strong>no genera semanas ante el IMSS</strong> a menos que el empleador te haya registrado formalmente. Desde 2020 los trabajadores del hogar pueden ser inscritos voluntariamente por sus empleadores.</p>
+          </div>
+        </div>
+        <div style="background:white;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;gap:14px;align-items:flex-start;">
+          <span style="font-size:1.3rem;min-width:28px;">🇺🇸</span>
+          <div>
+            <strong style="font-size:0.93rem;">Trabajé en Estados Unidos — ¿cuenta algo?</strong>
+            <p style="font-size:0.87rem;color:var(--gris-medio);margin-top:4px;">Los años cotizados al <strong>Social Security americano</strong> no cuentan directamente para la Ley 73. Sin embargo, México y EUA tienen un <strong>Convenio Bilateral</strong> que permite totalizar semanas de ambos países para cumplir requisitos mínimos de pensión en cada uno.</p>
+          </div>
+        </div>
+        <div style="background:white;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;gap:14px;align-items:flex-start;">
+          <span style="font-size:1.3rem;min-width:28px;">📉</span>
+          <div>
+            <strong style="font-size:0.93rem;">Mi patrón nunca me registró — ¿perdí mis derechos?</strong>
+            <p style="font-size:0.87rem;color:var(--gris-medio);margin-top:4px;">No necesariamente. Si tienes evidencia de la relación laboral (contratos, recibos de nómina, cartas del patrón, estados de cuenta), puedes presentar una <strong>"Aclaración de Semanas"</strong> ante el IMSS para recuperar esos periodos. Es un trámite gratuito pero requiere documentación.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUÉ HACER DESPUÉS -->
+    <div style="background:linear-gradient(135deg,var(--verde),var(--verde-claro));border-radius:16px;padding:24px;color:white;">
+      <h3 style="font-family:var(--font-display);font-size:1.1rem;margin-bottom:16px;text-align:center;">✅ Ya confirmé que soy Ley 73 — ¿Qué sigue?</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;">
+        <div style="background:rgba(255,255,255,0.15);border-radius:10px;padding:14px;text-align:center;cursor:pointer;" onclick="document.getElementById('que-es').scrollIntoView({behavior:'smooth'})">
+          <div style="font-size:1.4rem;margin-bottom:6px;">📖</div>
+          <div style="font-size:0.85rem;font-weight:600;">Entiende cómo funciona</div>
+          <div style="font-size:0.75rem;opacity:0.8;margin-top:4px;">Sección: ¿Qué es?</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.15);border-radius:10px;padding:14px;text-align:center;cursor:pointer;" onclick="document.getElementById('calculadora').scrollIntoView({behavior:'smooth'})">
+          <div style="font-size:1.4rem;margin-bottom:6px;">🧮</div>
+          <div style="font-size:0.85rem;font-weight:600;">Calcula tu pensión</div>
+          <div style="font-size:0.75rem;opacity:0.8;margin-top:4px;">Sección: Calculadora</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.15);border-radius:10px;padding:14px;text-align:center;cursor:pointer;" onclick="document.getElementById('modalidad40').scrollIntoView({behavior:'smooth'})">
+          <div style="font-size:1.4rem;margin-bottom:6px;">📋</div>
+          <div style="font-size:0.85rem;font-weight:600;">Conoce la Modalidad 40</div>
+          <div style="font-size:0.75rem;opacity:0.8;margin-top:4px;">Para aumentar tu pensión</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.15);border-radius:10px;padding:14px;text-align:center;cursor:pointer;" onclick="document.getElementById('tramite').scrollIntoView({behavior:'smooth'})">
+          <div style="font-size:1.4rem;margin-bottom:6px;">📝</div>
+          <div style="font-size:0.85rem;font-weight:600;">Inicia tu trámite</div>
+          <div style="font-size:0.75rem;opacity:0.8;margin-top:4px;">Sección: Paso a paso</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /verificar -->
   <div class="section" id="que-es">
     <div class="section-title">¿Qué es la Ley 73?</div>
     <div class="cards">
@@ -359,11 +629,23 @@ function calcular() {
       <div class="form-row">
         <div class="form-group">
           <label>Salario mensual promedio bruto (últimos 5 años)</label>
-          <input type="number" id="salario" placeholder="Ej. 18000" min="0">
+          <input type="number" id="salario" placeholder="Ej. 18000" min="0" max="87982" oninput="validarSalario(this)">
+          <div style="display:flex;justify-content:space-between;margin-top:5px;">
+            <span style="font-size:0.75rem;color:var(--verde);font-weight:600;">✅ Mínimo: $1</span>
+            <span style="font-size:0.75rem;color:var(--gris-medio);">Tope máx: $87,982 (25 UMAs)</span>
+          </div>
+          <div id="error-salario" style="display:none;background:#fff0f0;border:1px solid #ffb3b3;border-radius:8px;padding:8px 10px;margin-top:6px;font-size:0.83rem;color:#c0000a;"></div>
+          <div id="salario-ok" style="display:none;background:#e8f5ee;border:1px solid #a8d5b8;border-radius:8px;padding:8px 10px;margin-top:6px;font-size:0.82rem;color:var(--verde);"></div>
         </div>
         <div class="form-group">
           <label>Total de semanas cotizadas acumuladas</label>
-          <input type="number" id="semanas" placeholder="Ej. 900" min="500">
+          <input type="number" id="semanas" placeholder="Ej. 900" min="500" max="2600" oninput="validarSemanas(this)">
+          <div style="display:flex;justify-content:space-between;margin-top:5px;">
+            <span style="font-size:0.75rem;color:var(--verde);font-weight:600;">✅ Mínimo: 500 semanas</span>
+            <span style="font-size:0.75rem;color:var(--gris-medio);">Máx: 2,600</span>
+          </div>
+          <div id="error-semanas" style="display:none;background:#fff0f0;border:1px solid #ffb3b3;border-radius:8px;padding:10px;margin-top:8px;font-size:0.84rem;color:#c0000a;line-height:1.5;"></div>
+          <div id="semanas-ok" style="display:none;background:#e8f5ee;border:1px solid #a8d5b8;border-radius:8px;padding:8px 10px;margin-top:6px;font-size:0.82rem;color:var(--verde);"></div>
         </div>
       </div>
       <div class="form-row">
@@ -398,6 +680,7 @@ function calcular() {
           ⚠️ Tu cálculo resultó menor al mínimo garantizado. El IMSS te pagará la <strong>Pensión Mínima Garantizada 2026: $10,636/mes</strong>.
         </div>
         <div class="resultado-grid">
+          <div class="r-item"><div class="r-label">Semanas cotizadas</div><div class="r-val" id="semanas-r">—</div></div>
           <div class="r-item"><div class="r-label">Cuantía base (13%)</div><div class="r-val" id="cuantia-r">—</div></div>
           <div class="r-item"><div class="r-label">Incremento por semanas extra</div><div class="r-val" id="incremento-r">—</div></div>
           <div class="r-item"><div class="r-label">Factor de edad aplicado</div><div class="r-val" id="edad-r">—</div></div>
@@ -513,27 +796,27 @@ function calcular() {
       <div style="position:absolute;bottom:-30px;left:-30px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,0.05);"></div>
       <div style="font-size:3rem;margin-bottom:10px;">📋</div>
       <div style="display:inline-block;background:var(--dorado);color:#2a2a2a;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:14px;">Herramienta clave Ley 73</div>
-      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;margin-bottom:12px;">¿Qué es la Modalidad 40?</h2>
+      <h2 style="font-family:var(--font-display);font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;margin-bottom:12px;">¿Qué es la Modalidad 40?</h2>
       <p style="font-size:1rem;opacity:0.92;max-width:600px;margin:0 auto;line-height:1.7;">Es la <strong style="color:var(--dorado-claro);">"Continuación Voluntaria al Régimen Obligatorio"</strong>. Te permite seguir cotizando al IMSS <strong>aunque ya no tengas patrón</strong>, tú eliges el salario con el que cotizas. Es la herramienta más poderosa para aumentar tu pensión. <strong style="color:var(--dorado-claro);">Solo aplica para Ley 73.</strong></p>
     </div>
 
     <!-- PARA QUÉ SIRVE -->
     <div style="margin-bottom:28px;">
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--verde);margin-bottom:16px;padding-left:14px;border-left:4px solid var(--dorado);">🎯 ¿Para qué sirve?</h3>
+      <h3 style="font-family:var(--font-display);font-size:1.25rem;color:var(--verde);margin-bottom:16px;padding-left:14px;border-left:4px solid var(--dorado);">🎯 ¿Para qué sirve?</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
         <div style="background:white;border-radius:14px;padding:22px;box-shadow:0 2px 12px rgba(0,0,0,0.07);border-bottom:4px solid var(--verde-claro);text-align:center;">
           <div style="font-size:2.5rem;margin-bottom:10px;">📅</div>
-          <h4 style="font-family:'Playfair Display',serif;color:var(--verde);margin-bottom:8px;">Más semanas cotizadas</h4>
+          <h4 style="font-family:var(--font-display);color:var(--verde);margin-bottom:8px;">Más semanas cotizadas</h4>
           <p style="font-size:0.9rem;color:var(--gris-medio);">Cada mes que pagas suma <strong>4.3 semanas</strong> a tu historial. Más semanas = mayor porcentaje de pensión.</p>
         </div>
         <div style="background:white;border-radius:14px;padding:22px;box-shadow:0 2px 12px rgba(0,0,0,0.07);border-bottom:4px solid var(--dorado);text-align:center;">
           <div style="font-size:2.5rem;margin-bottom:10px;">💰</div>
-          <h4 style="font-family:'Playfair Display',serif;color:var(--verde);margin-bottom:8px;">Eleva tu salario promedio</h4>
+          <h4 style="font-family:var(--font-display);color:var(--verde);margin-bottom:8px;">Eleva tu salario promedio</h4>
           <p style="font-size:0.9rem;color:var(--gris-medio);">Puedes "reemplazar" los últimos 5 años con un salario más alto que tú eliges. <strong>Este es el factor más poderoso.</strong></p>
         </div>
         <div style="background:white;border-radius:14px;padding:22px;box-shadow:0 2px 12px rgba(0,0,0,0.07);border-bottom:4px solid var(--rojo);text-align:center;">
           <div style="font-size:2.5rem;margin-bottom:10px;">🛡️</div>
-          <h4 style="font-family:'Playfair Display',serif;color:var(--verde);margin-bottom:8px;">Conserva tu vigencia</h4>
+          <h4 style="font-family:var(--font-display);color:var(--verde);margin-bottom:8px;">Conserva tu vigencia</h4>
           <p style="font-size:0.9rem;color:var(--gris-medio);">Mantiene activos tus derechos ante el IMSS mientras no tienes patrón, evitando que pierdas tu derecho a pensión.</p>
         </div>
       </div>
@@ -541,7 +824,7 @@ function calcular() {
 
     <!-- EJEMPLO REAL IMPACTO -->
     <div style="background:linear-gradient(135deg,#fff8e1,#fffdf5);border:2px solid var(--dorado);border-radius:16px;padding:24px;margin-bottom:28px;">
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#7a5800;margin-bottom:18px;text-align:center;">🧮 Ejemplo real — Impacto en tu pensión</h3>
+      <h3 style="font-family:var(--font-display);font-size:1.15rem;color:#7a5800;margin-bottom:18px;text-align:center;">🧮 Ejemplo real — Impacto en tu pensión</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
         <div style="background:rgba(200,16,46,0.08);border-radius:12px;padding:16px;text-align:center;border:1.5px solid rgba(200,16,46,0.2);">
           <div style="font-size:1.5rem;margin-bottom:6px;">😟</div>
@@ -565,7 +848,7 @@ function calcular() {
 
     <!-- REQUISITOS VISUALES -->
     <div style="margin-bottom:28px;">
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--verde);margin-bottom:16px;padding-left:14px;border-left:4px solid var(--dorado);">✅ Requisitos 2026</h3>
+      <h3 style="font-family:var(--font-display);font-size:1.25rem;color:var(--verde);margin-bottom:16px;padding-left:14px;border-left:4px solid var(--dorado);">✅ Requisitos 2026</h3>
       <div style="background:white;border-radius:14px;padding:6px;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
         <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-bottom:1px solid #f0f0f0;">
           <span style="font-size:1.4rem;min-width:32px;">📆</span>
@@ -592,7 +875,7 @@ function calcular() {
 
     <!-- CUOTAS Y AÑOS -->
     <div style="margin-bottom:28px;">
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--verde);margin-bottom:16px;padding-left:14px;border-left:4px solid var(--dorado);">💸 ¿Cuánto se paga? — Cuotas 2026</h3>
+      <h3 style="font-family:var(--font-display);font-size:1.25rem;color:var(--verde);margin-bottom:16px;padding-left:14px;border-left:4px solid var(--dorado);">💸 ¿Cuánto se paga? — Cuotas 2026</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:18px;">
         <div style="background:white;border-radius:12px;padding:16px;box-shadow:0 2px 10px rgba(0,0,0,0.06);text-align:center;border-top:3px solid #e8f5ee;">
           <div style="font-size:0.78rem;color:var(--gris-medio);font-weight:600;letter-spacing:1px;text-transform:uppercase;">Salario $10,000</div>
@@ -652,7 +935,7 @@ function calcular() {
 
     <!-- LO QUE NO INCLUYE -->
     <div style="margin-bottom:28px;">
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--verde);margin-bottom:16px;padding-left:14px;border-left:4px solid var(--rojo);">⚠️ Lo que NO incluye — Advertencias importantes</h3>
+      <h3 style="font-family:var(--font-display);font-size:1.25rem;color:var(--verde);margin-bottom:16px;padding-left:14px;border-left:4px solid var(--rojo);">⚠️ Lo que NO incluye — Advertencias importantes</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
         <div style="background:#fff0f2;border:1.5px solid rgba(200,16,46,0.2);border-radius:12px;padding:16px;">
           <div style="font-size:1.3rem;margin-bottom:6px;">🏥</div>
@@ -679,7 +962,7 @@ function calcular() {
 
     <!-- CÓMO INSCRIBIRSE -->
     <div style="margin-bottom:16px;">
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--verde);margin-bottom:16px;padding-left:14px;border-left:4px solid var(--dorado);">📝 Cómo inscribirse paso a paso</h3>
+      <h3 style="font-family:var(--font-display);font-size:1.25rem;color:var(--verde);margin-bottom:16px;padding-left:14px;border-left:4px solid var(--dorado);">📝 Cómo inscribirse paso a paso</h3>
     </div>
 
     <div class="step">
@@ -714,7 +997,7 @@ function calcular() {
     <!-- CONSEJO CLAVE -->
     <div style="background:linear-gradient(135deg,#004a31,#006847);border-radius:16px;padding:24px;color:white;margin-top:10px;">
       <div style="font-size:1.8rem;margin-bottom:8px;text-align:center;">💡</div>
-      <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;text-align:center;color:var(--dorado-claro);margin-bottom:12px;">Consejo de oro</h4>
+      <h4 style="font-family:var(--font-display);font-size:1.1rem;text-align:center;color:var(--dorado-claro);margin-bottom:12px;">Consejo de oro</h4>
       <p style="font-size:0.92rem;opacity:0.95;text-align:center;line-height:1.7;">Lo más inteligente es inscribirse <strong style="color:var(--dorado-claro);">lo antes posible</strong> después de dejar de trabajar, con el <strong style="color:var(--dorado-claro);">salario más alto que puedas pagar</strong> y mantenerlo durante al menos <strong style="color:var(--dorado-claro);">los últimos 5 años antes de pensionarte</strong>. Esos 5 años son exactamente los que el IMSS usa para calcular tu pensión.</p>
     </div>
   </div>
@@ -899,13 +1182,13 @@ function calcular() {
   <!-- HERO PPR -->
   <div style="text-align:center;margin-bottom:40px;">
     <div style="display:inline-block;background:linear-gradient(135deg,#c9a84c,#f0d080);color:#1a1a2e;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:6px 20px;border-radius:20px;margin-bottom:16px;">💼 Sección Extra — Información Complementaria</div>
-    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:white;margin-bottom:14px;">Plan Personal de Retiro <span style="color:#f0d080;">(PPR)</span></h2>
+    <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:white;margin-bottom:14px;">Plan Personal de Retiro <span style="color:#f0d080;">(PPR)</span></h2>
     <p style="font-size:1rem;color:rgba(255,255,255,0.75);max-width:600px;margin:0 auto;line-height:1.7;">Una alternativa privada y complementaria al IMSS para construir tu retiro con beneficios fiscales. Basada en la Ley del Impuesto Sobre la Renta (LISR).</p>
   </div>
 
   <!-- ¿QUÉ ES EL PPR? -->
   <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px;margin-bottom:28px;">
-    <h3 style="font-family:'Playfair Display',serif;color:#f0d080;font-size:1.3rem;margin-bottom:16px;">¿Qué es el PPR?</h3>
+    <h3 style="font-family:var(--font-display);color:#f0d080;font-size:1.3rem;margin-bottom:16px;">¿Qué es el PPR?</h3>
     <p style="color:rgba(255,255,255,0.85);font-size:0.95rem;line-height:1.8;margin-bottom:14px;">Es una cuenta de inversión de largo plazo con beneficios fiscales respaldada por la Ley del ISR. Tú decides cuánto aportar cada mes, en qué institución y bajo qué artículo fiscal. Puede usarlo <strong style="color:#f0d080;">cualquier persona con RFC</strong> — empleados, independientes, empresarios.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:16px;">
       <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:14px;text-align:center;">
@@ -932,15 +1215,15 @@ function calcular() {
   </div>
 
   <!-- LOS 3 ARTÍCULOS -->
-  <h3 style="font-family:'Playfair Display',serif;color:white;font-size:1.3rem;margin-bottom:20px;padding-left:14px;border-left:4px solid #f0d080;">📜 Los 3 Artículos del ISR para PPR</h3>
+  <h3 style="font-family:var(--font-display);color:white;font-size:1.3rem;margin-bottom:20px;padding-left:14px;border-left:4px solid #f0d080;">📜 Los 3 Artículos del ISR para PPR</h3>
 
   <!-- ARTÍCULO 93 -->
   <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(100,180,255,0.3);border-radius:16px;padding:24px;margin-bottom:18px;">
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap;">
-      <div style="background:linear-gradient(135deg,#1565c0,#1976d2);color:white;font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;width:54px;height:54px;border-radius:12px;display:flex;align-items:center;justify-content:center;min-width:54px;">93</div>
+      <div style="background:linear-gradient(135deg,#1565c0,#1976d2);color:white;font-family:var(--font-display);font-size:1.3rem;font-weight:900;width:54px;height:54px;border-radius:12px;display:flex;align-items:center;justify-content:center;min-width:54px;">93</div>
       <div>
         <div style="color:rgba(255,255,255,0.6);font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;">Artículo 93 LISR</div>
-        <div style="color:white;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;">"Ahorra hoy, retira libre de impuestos a los 60"</div>
+        <div style="color:white;font-family:var(--font-display);font-size:1.1rem;font-weight:700;">"Ahorra hoy, retira libre de impuestos a los 60"</div>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:14px;">
@@ -970,10 +1253,10 @@ function calcular() {
   <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.4);border-radius:16px;padding:24px;margin-bottom:18px;position:relative;">
     <div style="position:absolute;top:-1px;right:20px;background:linear-gradient(135deg,#c9a84c,#f0d080);color:#1a1a2e;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:0 0 10px 10px;">⭐ El más usado</div>
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap;">
-      <div style="background:linear-gradient(135deg,#c9a84c,#f0d080);color:#1a1a2e;font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;width:54px;height:54px;border-radius:12px;display:flex;align-items:center;justify-content:center;min-width:54px;">151</div>
+      <div style="background:linear-gradient(135deg,#c9a84c,#f0d080);color:#1a1a2e;font-family:var(--font-display);font-size:1.3rem;font-weight:900;width:54px;height:54px;border-radius:12px;display:flex;align-items:center;justify-content:center;min-width:54px;">151</div>
       <div>
         <div style="color:rgba(255,255,255,0.6);font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;">Artículo 151 LISR</div>
-        <div style="color:white;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;">"El PPR clásico — deduces hoy, retiras libre a los 65"</div>
+        <div style="color:white;font-family:var(--font-display);font-size:1.1rem;font-weight:700;">"El PPR clásico — deduces hoy, retiras libre a los 65"</div>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:14px;">
@@ -1010,10 +1293,10 @@ function calcular() {
   <!-- ARTÍCULO 185 -->
   <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,100,100,0.3);border-radius:16px;padding:24px;margin-bottom:28px;">
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap;">
-      <div style="background:linear-gradient(135deg,#c0392b,#e74c3c);color:white;font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;width:54px;height:54px;border-radius:12px;display:flex;align-items:center;justify-content:center;min-width:54px;">185</div>
+      <div style="background:linear-gradient(135deg,#c0392b,#e74c3c);color:white;font-family:var(--font-display);font-size:1.3rem;font-weight:900;width:54px;height:54px;border-radius:12px;display:flex;align-items:center;justify-content:center;min-width:54px;">185</div>
       <div>
         <div style="color:rgba(255,255,255,0.6);font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;">Artículo 185 LISR</div>
-        <div style="color:white;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;">"Para ingresos altos — deduces más allá del límite del 151"</div>
+        <div style="color:white;font-family:var(--font-display);font-size:1.1rem;font-weight:700;">"Para ingresos altos — deduces más allá del límite del 151"</div>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:14px;">
@@ -1048,7 +1331,7 @@ function calcular() {
   </div>
 
   <!-- TABLA COMPARATIVA 3 ARTÍCULOS -->
-  <h3 style="font-family:'Playfair Display',serif;color:white;font-size:1.3rem;margin-bottom:16px;padding-left:14px;border-left:4px solid #f0d080;">📊 Comparativa Rápida — Los 3 Artículos</h3>
+  <h3 style="font-family:var(--font-display);color:white;font-size:1.3rem;margin-bottom:16px;padding-left:14px;border-left:4px solid #f0d080;">📊 Comparativa Rápida — Los 3 Artículos</h3>
   <div style="overflow-x:auto;border-radius:14px;margin-bottom:28px;">
     <table style="width:100%;border-collapse:collapse;font-size:0.88rem;background:rgba(255,255,255,0.04);">
       <thead>
@@ -1101,7 +1384,7 @@ function calcular() {
   </div>
 
   <!-- PPR vs LEY 73 COMPARATIVA -->
-  <h3 style="font-family:'Playfair Display',serif;color:white;font-size:1.3rem;margin-bottom:16px;padding-left:14px;border-left:4px solid #f0d080;">⚔️ PPR vs Ley 73 IMSS — ¿Cuál conviene más?</h3>
+  <h3 style="font-family:var(--font-display);color:white;font-size:1.3rem;margin-bottom:16px;padding-left:14px;border-left:4px solid #f0d080;">⚔️ PPR vs Ley 73 IMSS — ¿Cuál conviene más?</h3>
   <div style="overflow-x:auto;border-radius:14px;margin-bottom:24px;">
     <table style="width:100%;border-collapse:collapse;font-size:0.87rem;background:rgba(255,255,255,0.04);">
       <thead>
@@ -1165,7 +1448,7 @@ function calcular() {
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:28px;">
     <div style="background:rgba(0,104,71,0.2);border:1.5px solid rgba(0,168,107,0.4);border-radius:14px;padding:22px;">
       <div style="font-size:1.4rem;margin-bottom:8px;">🏛️</div>
-      <h4 style="font-family:'Playfair Display',serif;color:#51cf66;margin-bottom:12px;">La Ley 73 gana cuando...</h4>
+      <h4 style="font-family:var(--font-display);color:#51cf66;margin-bottom:12px;">La Ley 73 gana cuando...</h4>
       <ul style="padding-left:16px;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:2.1;">
         <li>Tienes <strong>muchos años cotizados</strong> y buen salario</li>
         <li>Quieres <strong>certeza total</strong> sobre tu pensión</li>
@@ -1176,7 +1459,7 @@ function calcular() {
     </div>
     <div style="background:rgba(30,60,120,0.3);border:1.5px solid rgba(100,180,255,0.3);border-radius:14px;padding:22px;">
       <div style="font-size:1.4rem;margin-bottom:8px;">💼</div>
-      <h4 style="font-family:'Playfair Display',serif;color:#74c0fc;margin-bottom:12px;">El PPR gana cuando...</h4>
+      <h4 style="font-family:var(--font-display);color:#74c0fc;margin-bottom:12px;">El PPR gana cuando...</h4>
       <ul style="padding-left:16px;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:2.1;">
         <li>Eres <strong>independiente o freelancer</strong> sin patrón</li>
         <li>Pagas <strong>mucho ISR</strong> y quieres deducir</li>
@@ -1189,7 +1472,7 @@ function calcular() {
 
   <!-- EJEMPLO CON NÚMEROS -->
   <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.3);border-radius:16px;padding:24px;margin-bottom:28px;">
-    <h4 style="font-family:'Playfair Display',serif;color:#f0d080;margin-bottom:18px;text-align:center;">🧮 Ejemplo con números reales — Persona de 45 años, $25,000/mes</h4>
+    <h4 style="font-family:var(--font-display);color:#f0d080;margin-bottom:18px;text-align:center;">🧮 Ejemplo con números reales — Persona de 45 años, $25,000/mes</h4>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
       <div style="background:rgba(0,104,71,0.2);border-radius:12px;padding:16px;text-align:center;">
         <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Solo Ley 73</div>
@@ -1213,7 +1496,7 @@ function calcular() {
   </div>
 
   <!-- ESTRATEGIA IDEAL POR PERFIL -->
-  <h3 style="font-family:'Playfair Display',serif;color:white;font-size:1.3rem;margin-bottom:16px;padding-left:14px;border-left:4px solid #f0d080;">🎯 Estrategia ideal según tu perfil</h3>
+  <h3 style="font-family:var(--font-display);color:white;font-size:1.3rem;margin-bottom:16px;padding-left:14px;border-left:4px solid #f0d080;">🎯 Estrategia ideal según tu perfil</h3>
   <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px;">
     <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:16px;display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;">
       <span style="font-size:1.4rem;min-width:32px;">👷</span>
